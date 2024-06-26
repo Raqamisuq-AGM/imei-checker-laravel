@@ -150,4 +150,32 @@ class FrontendController extends Controller
         }
         return view('pages.frontend.imei-checker.imei-checker');
     }
+
+    //buy credit Check method
+    public function buyCredit()
+    {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '5';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
+        return view('pages.frontend.credit.buy');
+    }
 }
