@@ -11,6 +11,7 @@ class ImeiLimit extends Model
 
     protected $fillable = [
         'user_id',
+        'ip',
         'limit',
     ];
 

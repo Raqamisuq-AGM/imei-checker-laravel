@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('imei_limits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('ip')->nullable();
             $table->string('limit')->nullable();
             $table->foreign('user_id')
                 ->references('id')

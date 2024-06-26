@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
 
         //Create user
         $user = User::create([
+            'ip' => '127.0.0.1',
             'name' => 'User',
             'email' => 'user@example.com',
             'password' => Hash::make('12345678'),
@@ -38,6 +39,7 @@ class UserSeeder extends Seeder
 
         // Create IMEI limit for the last created user
         ImeiLimit::create([
+            'ip' => '127.0.0.1',
             'user_id' => $user->id,
             'limit' => '5', // Replace with actual IMEI
         ]);
