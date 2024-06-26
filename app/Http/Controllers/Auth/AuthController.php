@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Credit;
 use App\Models\ImeiLimit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class AuthController extends Controller
             $credit = new Credit();
             $credit->user_id = $user->id;
             $credit->credit = '0';
+            $credit->ip = $userIp;
             $credit->save();
         }
         return view('pages.frontend.auth.login.login');
@@ -62,6 +64,7 @@ class AuthController extends Controller
             $credit = new Credit();
             $credit->user_id = $user->id;
             $credit->credit = '0';
+            $credit->ip = $userIp;
             $credit->save();
         }
         return view('pages.frontend.auth.signup.signup');

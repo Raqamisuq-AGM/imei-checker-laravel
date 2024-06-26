@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Imei\ImeiController as ImeiImeiController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\ImeiController as UserImeiController;
 use App\Http\Controllers\User\SettingController as UserSettingController;
@@ -28,11 +29,17 @@ Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.detail');
 Route::get('/imei-check', [FrontendController::class, 'imeiCheck'])->name('imei-check');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
+// Login Route
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
+    Route::post('/auth-user', [AuthController::class, 'authUser'])->name('auth.user');
+    Route::post('/create-user', [AuthController::class, 'createUser'])->name('create.user');
+});
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/auth-user', [AuthController::class, 'authUser'])->name('auth.user');
-Route::post('/create-user', [AuthController::class, 'createUser'])->name('create.user');
+Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name('imei.checking');
+Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name('imei.checking.result');
+Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
 
 
 // Admin Route
@@ -80,7 +87,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('imei')->group(function () {
             Route::get('/all', [UserImeiController::class, 'all'])->name('dashboard.imei.all');
             Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
-            Route::get('/checking', [UserImeiController::class, 'checking'])->name('dashboard.imei.checking');
         });
         // Settings Route
         Route::prefix('setting')->group(function () {

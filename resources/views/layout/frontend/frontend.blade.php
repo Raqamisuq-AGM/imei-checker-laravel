@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="content-wrapper">
         <!-- Nav bar -->
         @include('partials.frontend.header')
 

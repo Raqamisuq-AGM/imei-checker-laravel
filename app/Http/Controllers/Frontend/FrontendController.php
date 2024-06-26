@@ -55,6 +55,7 @@ class FrontendController extends Controller
             // Create the user limit
             $credit = new Credit();
             $credit->user_id = $user->id;
+            $credit->ip = $userIp;
             $credit->credit = '0';
             $credit->save();
         }
@@ -85,6 +86,7 @@ class FrontendController extends Controller
             $credit = new Credit();
             $credit->user_id = $user->id;
             $credit->credit = '0';
+            $credit->ip = $userIp;
             $credit->save();
         }
         $items = Blog::orderBy('id', 'desc')->paginate(10);
@@ -113,6 +115,7 @@ class FrontendController extends Controller
             $credit = new Credit();
             $credit->user_id = $user->id;
             $credit->credit = '0';
+            $credit->ip = $userIp;
             $credit->save();
         }
         $item = Blog::where('slug', $slug)->firstOrFail(); // Fetch single item by slug
@@ -142,6 +145,7 @@ class FrontendController extends Controller
             $credit = new Credit();
             $credit->user_id = $user->id;
             $credit->credit = '0';
+            $credit->ip = $userIp;
             $credit->save();
         }
         return view('pages.frontend.imei-checker.imei-checker');

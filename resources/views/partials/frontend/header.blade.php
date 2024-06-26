@@ -29,12 +29,20 @@
             </ul>
             <!-- Right navigation -->
             <div class="navbar-nav ms-lg-4">
-                <a class="nav-item nav-link" href="{{ route('login') }}">Sign in</a>
+                @guest
+                    <a class="nav-item nav-link" href="{{ route('login') }}">Sign in</a>
+                @endguest
             </div>
             <!-- Action -->
             <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-                <a href="{{ route('signup') }}" class="nav-item nav-link"> Signup </a>
+                @guest
+                    <a href="{{ route('signup') }}" class="nav-item nav-link">Signup</a>
+                @else
+                    <a href="{{ Auth::user()->type == 'admin' ? route('admin.index') : route('dashboard.index') }}"
+                        class="nav-item nav-link">Dashboard</a>
+                @endguest
             </div>
+
         </div>
     </div>
 </nav>
