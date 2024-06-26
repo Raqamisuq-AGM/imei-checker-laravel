@@ -98,9 +98,9 @@
                         <a href="{{ route('imei-check') }}" class="btn btn-lg btn-primary shadow-sm mx-2 px-lg-8">
                             Check IMEI
                         </a>
-                        <a href="#pricing-sec" class="btn btn-lg btn-neutral mx-2 px-lg-8">
+                        {{-- <a href="#pricing-sec" class="btn btn-lg btn-neutral mx-2 px-lg-8">
                             Pricing
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
         </div>
     </div>
     <!-- Pricing Section -->
-    <section class="pricing py-5" id="pricing-sec">
+    {{-- <section class="pricing py-5" id="pricing-sec">
         <div class="container">
             <div class="row">
                 <!-- Free Tier -->
@@ -262,7 +262,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Contact Section -->
     <section class="ftco-section" id="contact-us">
         <div class="container">

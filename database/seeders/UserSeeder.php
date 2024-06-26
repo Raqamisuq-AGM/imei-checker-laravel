@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
 
         // Create Credit for the last created user
         Credit::create([
+            'ip' => '127.0.0.1',
             'user_id' => $user->id,
             'credit' => '0', // Replace with actual IMEI
         ]);

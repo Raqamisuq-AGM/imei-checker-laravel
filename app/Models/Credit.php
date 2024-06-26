@@ -12,6 +12,7 @@ class Credit extends Model
     protected $fillable = [
         'user_id',
         'credit',
+        'ip',
     ];
 
     public function user()

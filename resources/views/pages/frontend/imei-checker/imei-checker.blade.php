@@ -14,12 +14,16 @@
                     yourself from buying or using stolen or blacklisted devices! All
                     Brands / Devices supported, including Apple, iPhone and Samsung.
                 </p>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Enter IMEI or Serial" aria-label="IMEI or Serial" />
-                    <div class="input-group-append">
-                        <button class="btn btn-danger" type="button" style="height: 52px;">Check</button>
+                <form action="{{ route('imei.checking') }}" method="post">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter IMEI or Serial"
+                            aria-label="IMEI or Serial" name="imei" />
+                        <div class="input-group-append">
+                            <button class="btn btn-danger" type="submit" style="height: 52px;">Check</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

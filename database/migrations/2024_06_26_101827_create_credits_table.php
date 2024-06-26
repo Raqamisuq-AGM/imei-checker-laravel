@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('credit')->nullable();
+            $table->string('ip')->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
