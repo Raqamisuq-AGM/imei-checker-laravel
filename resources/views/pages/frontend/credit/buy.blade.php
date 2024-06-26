@@ -6,7 +6,7 @@
     <div class="container ">
         <div class="row justify-content-center align-items-center" style="min-height: 80vh">
             <div class="col-md-8">
-                <h1>You are out of credits, Please buy credit</h1>
+                <h1>Buy Credit</h1>
                 <section class="pricing py-5" id="pricing-sec" style="background: transparent;">
                     <div class="container">
                         <div class="row">

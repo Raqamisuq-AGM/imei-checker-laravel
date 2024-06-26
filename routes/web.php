@@ -40,6 +40,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name('imei.checking');
 Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name('imei.checking.result');
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
+Route::get('/buy-credit', [FrontendController::class, 'buyCredit'])->name('buy.credit');
 
 
 // Admin Route
