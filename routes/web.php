@@ -1,5 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImeiController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\ImeiController as UserImeiController;
+use App\Http\Controllers\User\SettingController as UserSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +23,71 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Frontend Route
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
+Route::get('/blog/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.detail');
+Route::get('/imei-check', [FrontendController::class, 'imeiCheck'])->name('imei-check');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/auth-user', [AuthController::class, 'authUser'])->name('auth.user');
+Route::post('/create-user', [AuthController::class, 'createUser'])->name('create.user');
+
+
+// Admin Route
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.index');
+
+    Route::prefix('admin')->group(function () {
+        // User Route
+        Route::prefix('user')->group(function () {
+            Route::get('/all', [UserController::class, 'all'])->name('admin.user.all');
+        });
+
+        // IMEI List Route
+        Route::prefix('imei')->group(function () {
+            Route::get('/all', [ImeiController::class, 'all'])->name('admin.imei.all');
+        });
+
+        // Blog Route
+        Route::prefix('blog')->group(function () {
+            Route::get('/all', [BlogController::class, 'all'])->name('admin.blog.all');
+            Route::get('/create', [BlogController::class, 'create'])->name('admin.blog.create');
+            Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('admin.blog.edit');
+            Route::post('/store', [BlogController::class, 'store'])->name('admin.blog.store');
+            Route::post('/update', [BlogController::class, 'update'])->name('admin.blog.update');
+            Route::get('/delete/{id}', [BlogController::class, 'delete'])->name('admin.blog.delete');
+        });
+
+        // Settings Route
+        Route::prefix('setting')->group(function () {
+            Route::get('/change-email', [SettingController::class, 'changeEmail'])->name('admin.setting.change-email');
+            Route::get('/change-password', [SettingController::class, 'changePassword'])->name('admin.setting.change-password');
+            Route::post('/update-email', [SettingController::class, 'updateEmail'])->name('admin.setting.update-email');
+            Route::post('/update-password', [SettingController::class, 'updatePassword'])->name('admin.setting.update-password');
+        });
+    });
+});
+
+
+// User Route
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
+    Route::prefix('dashboard')->group(function () {
+
+        // IMEI List Route
+        Route::prefix('imei')->group(function () {
+            Route::get('/all', [UserImeiController::class, 'all'])->name('dashboard.imei.all');
+            Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
+            Route::get('/checking', [UserImeiController::class, 'checking'])->name('dashboard.imei.checking');
+        });
+        // Settings Route
+        Route::prefix('setting')->group(function () {
+            Route::get('/change-email', [UserSettingController::class, 'changeEmail'])->name('dashboard.setting.change-email');
+            Route::get('/change-password', [UserSettingController::class, 'changePassword'])->name('dashboard.setting.change-password');
+            Route::post('/update-email', [UserSettingController::class, 'updateEmail'])->name('dashboard.setting.update-email');
+            Route::post('/update-password', [UserSettingController::class, 'updatePassword'])->name('dashboard.setting.update-password');
+        });
+    });
 });
