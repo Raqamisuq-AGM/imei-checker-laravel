@@ -178,4 +178,44 @@ class FrontendController extends Controller
         }
         return view('pages.frontend.credit.buy');
     }
+
+    //checkout method
+    public function checkout(Request $request, $type)
+    {
+        if ($type == 'basic') {
+            $request->session()->put('amount', '1');
+            $request->session()->put('credits', '10');
+        } else if ($type == 'standard') {
+            $request->session()->put('amount', '3');
+            $request->session()->put('credits', '30');
+        } else if ($type == 'advanced') {
+            $request->session()->put('amount', '5');
+            $request->session()->put('credits', '50');
+        } else {
+            return redirect()->route('index');
+        }
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '5';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
+        return view('pages.frontend.checkout.checkout', compact('type'));
+    }
 }

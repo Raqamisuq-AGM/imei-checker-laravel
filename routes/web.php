@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Imei\ImeiController as ImeiImeiController;
+use App\Http\Controllers\Payment\StripePaymentController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\ImeiController as UserImeiController;
 use App\Http\Controllers\User\SettingController as UserSettingController;
@@ -41,6 +42,8 @@ Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name
 Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name('imei.checking.result');
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
 Route::get('/buy-credit', [FrontendController::class, 'buyCredit'])->name('buy.credit');
+Route::get('/checkout/{type}', [FrontendController::class, 'checkout'])->name('checkout');
+Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 
 // Admin Route

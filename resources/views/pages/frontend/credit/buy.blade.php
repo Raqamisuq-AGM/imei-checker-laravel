@@ -19,7 +19,8 @@
                                             <li>10 Credits / $1</li>
                                         </ul>
                                         <div class="d-grid">
-                                            <a href="#" class="btn btn-primary text-uppercase">Buy</a>
+                                            <a href="{{ route('checkout', ['type' => 'basic']) }}"
+                                                class="btn btn-primary text-uppercase">Buy</a>
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +34,8 @@
                                             <li>30 Credits / $3</li>
                                         </ul>
                                         <div class="d-grid">
-                                            <a href="#" class="btn btn-primary text-uppercase">Buy</a>
+                                            <a href="{{ route('checkout', ['type' => 'standard']) }}"
+                                                class="btn btn-primary text-uppercase">Buy</a>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +49,8 @@
                                             <li>50 Credits / $5</li>
                                         </ul>
                                         <div class="d-grid">
-                                            <a href="#" class="btn btn-primary text-uppercase">Buy</a>
+                                            <a href="{{ route('checkout', ['type' => 'advanced']) }}"
+                                                class="btn btn-primary text-uppercase">Buy</a>
                                         </div>
                                     </div>
                                 </div>
