@@ -31,7 +31,8 @@ class ImeiController extends Controller
 
 
         // Define your API key, service ID, and the IMEI/SN
-        $apiKey = 'MX3Gx-3DJ1y-Nb2EN-aq6gu-3J0z0-g4jUg';
+        $apiKey = 'fyHBj-1vGss-eRlmP-jpFD5-kYirc-WNYNm';
+        // $apiKey = env('IMEI_CHECK_API ');
         $serviceId = $request->input('service_id');
         $imei = $request->input('imei');
 
