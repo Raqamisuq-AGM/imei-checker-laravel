@@ -112,9 +112,9 @@
                             style="">
                             <div class="accordion-body">
                                 <div class="px-2 col-lg-12 mb-3">
-                                    <form action="#">
+                                    <form action="{{ route('paypal.pay') }}">
                                         @csrf
-                                        <input type="text" value="{{ session('amount') }}" name="anount" hidden>
+                                        <input type="text" value="{{ session('amount') }}" name="amount" hidden>
                                         <button class="btn btn-primary w-100 mt-2">Pay now</button>
                                     </form>
                                 </div>

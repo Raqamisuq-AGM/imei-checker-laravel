@@ -49,7 +49,8 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-user"></i>
                         </div>
-                        <a href="#" class="small-box-footer">view <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('checkout', ['type' => 'advanced']) }}" class="small-box-footer">Buy more <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
