@@ -11,6 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "league/omnipay": "^3.2",
+        "omnipay/paypal": "^3.0",
         "stripe/stripe-php": "^15.0",
         "yoeunes/toastr": "^2.3"
     },
@@ -63,7 +65,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",

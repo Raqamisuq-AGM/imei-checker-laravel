@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Imei\ImeiController as ImeiImeiController;
+use App\Http\Controllers\Payment\PayPalController;
 use App\Http\Controllers\Payment\StripePaymentController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\ImeiController as UserImeiController;
@@ -43,7 +44,13 @@ Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name(
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
 Route::get('/buy-credit', [FrontendController::class, 'buyCredit'])->name('buy.credit');
 Route::get('/checkout/{type}', [FrontendController::class, 'checkout'])->name('checkout');
+// Strip Route
 Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+
+// Paypal Route
+Route::post('/paypal/pay', [PayPalController::class, 'pay'])->name('paypal.pay');
+Route::get('/paypal/success', [PayPalController::class, 'paypal.success']);
+Route::get('/paypal/error', [PayPalController::class, 'paypal.error']);
 
 
 // Admin Route
@@ -90,7 +97,7 @@ Route::middleware('auth')->group(function () {
         // IMEI List Route
         Route::prefix('imei')->group(function () {
             Route::get('/all', [UserImeiController::class, 'all'])->name('dashboard.imei.all');
-            Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
+            // Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
         });
         // Settings Route
         Route::prefix('setting')->group(function () {
