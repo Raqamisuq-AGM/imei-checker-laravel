@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend')
 @section('title')
-    Checkout
+    Checkout | Check IMEI Pro
 @endsection
 @section('content')
     <div class="container">

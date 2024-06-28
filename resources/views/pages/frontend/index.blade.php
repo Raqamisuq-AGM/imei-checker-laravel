@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend')
 @section('title')
-    IMIE Checker
+    Check IMEI Pro
 @endsection
 @section('content')
     <!-- Hero Section -->
@@ -90,7 +90,7 @@
                     </h5>
                     <!-- Text -->
                     <p class="lead mb-10">
-                        ImeiCheck.com offers a variety of IMEI Check Services providing
+                        Check IMEI Pro offers a variety of IMEI Check Services providing
                         all the information about your device, fast and accessible!
                     </p>
                     <!-- Buttons -->
@@ -151,8 +151,7 @@
                     <div class="card border-0 card-shadow mb-4">
                         <div class="card-body text-center">
                             <div class="my-3">
-                                <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/features/feature1/market.png"
-                                    alt="wrapkit" />
+                                <img src="https://imeicheck.com/front/images/php-icon1.svg" alt="wrapkit" />
                             </div>
                             <h6 class="font-weight-medium">DHRU and PHP APIs</h6>
                             <p class="mt-3">
@@ -168,8 +167,7 @@
                     <div class="card border-0 card-shadow mb-4">
                         <div class="card-body text-center">
                             <div class="my-3">
-                                <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/features/feature1/fruit.png"
-                                    alt="wrapkit" />
+                                <img src="https://imeicheck.com/front/images/php-icon1.svg" alt="wrapkit" />
                             </div>
                             <h6 class="font-weight-medium">Instant Check Services</h6>
                             <p class="mt-3">
@@ -184,8 +182,7 @@
                     <div class="card border-0 card-shadow mb-4">
                         <div class="card-body text-center">
                             <div class="my-3">
-                                <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/features/feature1/instant.png"
-                                    alt="wrapkit" />
+                                <img src="https://imeicheck.com/front/images/php-icon3.svg" alt="wrapkit" />
                             </div>
                             <h6 class="font-weight-medium">Absolutely Safe!</h6>
                             <p class="mt-3">
@@ -268,7 +265,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Contact Form #01</h2>
+                    <h2 class="heading-section">Contact Us</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -326,19 +323,7 @@
                                         </div>
                                         <div class="text pl-3">
                                             <p>
-                                                <span>Address:</span> 198 West 21th Street, Suite
-                                                721 New York NY 10016
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="dbox w-100 d-flex align-items-center">
-                                        <div class="icon d-flex align-items-center justify-content-center">
-                                            <span class="fa fa-phone"></span>
-                                        </div>
-                                        <div class="text pl-3">
-                                            <p>
-                                                <span>Phone:</span>
-                                                <a href="tel://1234567920">+ 1235 2355 98</a>
+                                                <span>Address:</span> Carrer de marina 294, Barcelona spain
                                             </p>
                                         </div>
                                     </div>
@@ -359,7 +344,7 @@
                                         </div>
                                         <div class="text pl-3">
                                             <p>
-                                                <span>Website</span> <a href="#">yoursite.com</a>
+                                                <span>Website</span> <a href="#">checkimeipro.info</a>
                                             </p>
                                         </div>
                                     </div>

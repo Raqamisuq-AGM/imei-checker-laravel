@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend')
 @section('title')
-    Login
+    Login | Check IMEI Pro
 @endsection
 @section('content')
     <section class="vh-100">

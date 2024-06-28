@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend')
 @section('title')
-    IMIE Checker
+    Check IMEI Pro
 @endsection
 @section('content')
     <div class="container ">

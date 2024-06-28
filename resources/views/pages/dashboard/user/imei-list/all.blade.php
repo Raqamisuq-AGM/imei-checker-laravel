@@ -30,7 +30,7 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>IMEI</th>
-                                        <th>User</th>
+                                        <th>Result</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,7 +43,21 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $item->imei }}</td>
-                                                <td>{{ $item->user->name }}</td>
+                                                <td>
+                                                    @php
+                                                        $result = json_decode($item->result, true);
+                                                    @endphp
+                                                    @if ($result)
+                                                        <ul>
+                                                            @foreach ($result as $key => $value)
+                                                                <li><strong>{{ ucfirst($key) }}:</strong>
+                                                                    {{ $value }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        No result data available
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif

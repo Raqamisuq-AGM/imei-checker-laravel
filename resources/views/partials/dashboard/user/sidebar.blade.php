@@ -7,7 +7,7 @@
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{ route('admin.index') }}" class="nav-link">
+                    <a href="{{ route('dashboard.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.imei.check-new') }}" class="nav-link">
+                            <a href="{{ route('imei-check') }}" class="nav-link" target="_blank">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Check new</p>
                             </a>

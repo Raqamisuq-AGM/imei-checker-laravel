@@ -1,5 +1,5 @@
 @extends('layout.frontend.frontend')
-@section('title', 'IMIE Checker')
+@section('title', 'Check IMEI Pro')
 
 @section('content')
     <div class="blog-single gray-bg">

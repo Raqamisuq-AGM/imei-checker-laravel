@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
         // IMEI List Route
         Route::prefix('imei')->group(function () {
             Route::get('/all', [UserImeiController::class, 'all'])->name('dashboard.imei.all');
-            Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
+            // Route::get('/check-new', [UserImeiController::class, 'checkNew'])->name('dashboard.imei.check-new');
         });
         // Settings Route
         Route::prefix('setting')->group(function () {

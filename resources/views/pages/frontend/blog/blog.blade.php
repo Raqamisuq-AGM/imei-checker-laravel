@@ -1,6 +1,6 @@
 @extends('layout.frontend.frontend')
 @section('title')
-    IMIE Checker
+    Blogs | Check IMEI Pro
 @endsection
 @section('content')
     <section class="blog-listing gray-bg">
