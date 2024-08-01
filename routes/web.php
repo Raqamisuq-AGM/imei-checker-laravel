@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImeiController;
 use App\Http\Controllers\Admin\SettingController;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend Route
 Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::post('/contact-us-submit', [FrontendController::class, 'contactUsSubmit'])->name('contactUsSubmit');
 Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.detail');
 Route::get('/imei-check', [FrontendController::class, 'imeiCheck'])->name('imei-check');
@@ -37,6 +39,15 @@ Route::middleware('guest')->group(function () {
     Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
     Route::post('/auth-user', [AuthController::class, 'authUser'])->name('auth.user');
     Route::post('/create-user', [AuthController::class, 'createUser'])->name('create.user');
+
+    Route::prefix('auth')->group(function () {
+        Route::get('/forget-password', [AuthController::class, 'forgetPassword'])->name('auth.forget.password');
+        Route::get('/otp', [AuthController::class, 'forgetPasswordOtp'])->name('auth.forget.password.otp');
+        Route::get('/change-password', [AuthController::class, 'forgetUpdatePassword'])->name('auth.forget.password.change');
+        Route::post('/change-password/check-email', [AuthController::class, 'forgetPasswordCheckEmail'])->name('auth.forget.password.check.email');
+        Route::post('/change-password/check-otp', [AuthController::class, 'forgetPasswordCheckOtp'])->name('auth.forget.password.check.otp');
+        Route::post('/change-password/update', [AuthController::class, 'forgetPasswordUpdatePWD'])->name('auth.forget.password.update');
+    });
 });
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name('imei.checking');
@@ -84,6 +95,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/change-password', [SettingController::class, 'changePassword'])->name('admin.setting.change-password');
             Route::post('/update-email', [SettingController::class, 'updateEmail'])->name('admin.setting.update-email');
             Route::post('/update-password', [SettingController::class, 'updatePassword'])->name('admin.setting.update-password');
+        });
+
+        // Contact Message Route
+        Route::prefix('contact')->group(function () {
+            Route::get('/all', [ContactMessageController::class, 'all'])->name('admin.contact.message');
         });
     });
 });

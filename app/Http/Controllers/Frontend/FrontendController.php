@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactEmail;
 use App\Models\Blog;
+use App\Models\ContactMessage;
 use App\Models\Credit;
 use App\Models\Imei;
 use App\Models\ImeiLimit;
@@ -11,6 +13,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -217,5 +221,36 @@ class FrontendController extends Controller
             $credit->save();
         }
         return view('pages.frontend.checkout.checkout', compact('type'));
+    }
+
+    //contact us message submit method
+    public function contactUsSubmit(Request $request)
+    {
+        // Validate the request input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        // Handle validation failures
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $contactMessage = new ContactMessage();
+        $contactMessage->name = $request->input('name');
+        $contactMessage->email = $request->input('email');
+        $contactMessage->subject = $request->input('subject');
+        $contactMessage->message = $request->input('message');
+        $contactMessage->save();
+
+        // Send the messages via email
+        Mail::to('raqamisuq@gmail.com')->send(new ContactEmail($request->input('name'), $request->input('email'), $request->input('subject'), $request->input('message')));
+
+        //return success message with tostr
+        toastr()->success('Your message submitted successfully. We will contact you soon', 'success', ['timeOut' => 5000, 'closeButton' => true]);
+        return redirect()->route('index');
     }
 }

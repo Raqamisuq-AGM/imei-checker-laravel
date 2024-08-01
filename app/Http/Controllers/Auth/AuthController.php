@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OtpEmail;
 use App\Models\Credit;
 use App\Models\ImeiLimit;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 
 class AuthController extends Controller
@@ -112,7 +114,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email',
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            // 'phone' => 'required|string|max:15',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -150,6 +152,114 @@ class AuthController extends Controller
 
         //return success message with tostr
         toastr()->success('You have been logged out successfully.', 'success', ['timeOut' => 5000, 'closeButton' => true]);
+        return redirect()->route('login');
+    }
+
+    public function forgetPassword(Request $request)
+    {
+        return view('pages.frontend.auth.login.forget-password');
+    }
+
+    public function forgetPasswordOtp(Request $request)
+    {
+        return view('pages.frontend.auth.login.otp');
+    }
+
+    public function forgetUpdatePassword(Request $request)
+    {
+        return view('pages.frontend.auth.login.change-password');
+    }
+
+    public function forgetPasswordCheckEmail(Request $request)
+    {
+
+        // Validate the request input
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+        ]);
+
+        // Handle validation failures
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Check if the email exists in the database
+        $user = User::where('email', $request->email)->first();
+
+        if ($user == null) {
+            return redirect()->back()->withErrors(['email' => 'Email not found.']);
+        }
+
+        // Generate a random OTP and send it to the user's email
+        $otp = mt_rand(1000, 9999);
+        $user->otp = $otp;
+        $user->save();
+
+        $request->session()->put('forgetEmail', $request->email);
+        $request->session()->put('forgetOtp', $otp);
+
+        // Send the OTP via email
+        Mail::to($user->email)->send(new OtpEmail($otp));
+
+        //return success message with tostr
+        toastr()->success('Please check your email inbox, we have sent OTP', ['timeOut' => 5000, 'closeButton' => true]);
+        return redirect()->route('auth.forget.password.otp');
+    }
+
+    public function forgetPasswordCheckOtp(Request $request)
+    {
+
+        // Validate the request input
+        $validator = Validator::make($request->all(), [
+            'otp' => 'required',
+        ]);
+
+        // Handle validation failures
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Retrieve the OTP from the session
+        $sessionOtp = $request->session()->get('forgetOtp');
+
+        // Retrieve the OTP from the request input
+        $inputOtp = $request->input('otp');
+
+        // Check if the OTPs match
+        if ($sessionOtp == $inputOtp) {
+            return redirect()->route('auth.forget.password.change');
+        } else {
+            return redirect()->back()->withErrors(['otp' => 'Wrong OTP']);
+        }
+        //return success message with tostr
+        // toastr()->success('You have been logged out successfully.', 'success', ['timeOut' => 5000, 'closeButton' => true]);
+        // return redirect()->route('login');
+    }
+
+    public function forgetPasswordUpdatePWD(Request $request)
+    {
+        // Validate the request input
+        $validator = Validator::make($request->all(), [
+            'password' => 'required',
+            'cnf_password' => 'required|same:password',
+        ]);
+
+        // Handle validation failures
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $sessionEmail = $request->session()->get('forgetEmail');
+
+        $user = User::where('email', $sessionEmail)->first();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        $request->session()->forget('forgetEmail');
+        $request->session()->forget('forgetOtp');
+
+        //return success message with tostr
+        toastr()->success('Password updated successfully.', 'success', ['timeOut' => 5000, 'closeButton' => true]);
         return redirect()->route('login');
     }
 }
