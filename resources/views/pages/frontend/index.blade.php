@@ -142,7 +142,7 @@
         </div>
     </section>
     <!-- Feature Section -->
-    <div class="bg-light py-5 service-1">
+    {{-- <div class="bg-light py-5 service-1">
         <div class="container">
             <!-- Row  -->
             <div class="row">
@@ -195,7 +195,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Pricing Section -->
     {{-- <section class="pricing py-5" id="pricing-sec">
         <div class="container">
@@ -279,7 +279,9 @@
                                     <div id="form-message-success" class="mb-4">
                                         Your message was sent, thank you!
                                     </div>
-                                    <form method="POST" id="contactForm" name="contactForm">
+                                    <form action="{{ route('contactUsSubmit') }}" method="post" id="contactForm"
+                                        name="contactForm">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -317,7 +319,7 @@
                             <div class="col-md-5 d-flex align-items-stretch">
                                 <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
                                     <h3 class="mb-4 mt-md-4">Contact us</h3>
-                                    <div class="dbox w-100 d-flex align-items-start">
+                                    {{-- <div class="dbox w-100 d-flex align-items-start">
                                         <div class="icon d-flex align-items-center justify-content-center">
                                             <span class="fa fa-map-marker"></span>
                                         </div>
@@ -326,7 +328,7 @@
                                                 <span>Address:</span> Carrer de marina 294, Barcelona spain
                                             </p>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="dbox w-100 d-flex align-items-center">
                                         <div class="icon d-flex align-items-center justify-content-center">
                                             <span class="fa fa-paper-plane"></span>
@@ -334,7 +336,7 @@
                                         <div class="text pl-3">
                                             <p>
                                                 <span>Email:</span>
-                                                <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                                                <a href="mailto:contact@icheckimeipro.info">contact@icheckimeipro.info</a>
                                             </p>
                                         </div>
                                     </div>
@@ -344,7 +346,7 @@
                                         </div>
                                         <div class="text pl-3">
                                             <p>
-                                                <span>Website</span> <a href="#">checkimeipro.info</a>
+                                                <span>Website</span> <a href="#">icheckimeipro.info</a>
                                             </p>
                                         </div>
                                     </div>

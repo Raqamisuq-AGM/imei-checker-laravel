@@ -36,13 +36,13 @@
                         </div>
 
                         <!-- Phone input -->
-                        <div data-mdb-input-init class="form-outline mb-4">
+                        {{-- <div data-mdb-input-init class="form-outline mb-4">
                             <input type="text" id="form3Example3" class="form-control form-control-lg"
                                 placeholder="Enter your phone no" name="phone" value="{{ old('phone') }}" />
                             @if ($errors->has('phone'))
                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                             @endif
-                        </div>
+                        </div> --}}
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-3">

@@ -48,6 +48,13 @@
                         </li>
                     </ul>
                 </li>
+                {{-- Contact Message Route --}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.contact.message') }}" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>Contact Message</p>
+                    </a>
+                </li>
                 {{-- Blog Route --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
