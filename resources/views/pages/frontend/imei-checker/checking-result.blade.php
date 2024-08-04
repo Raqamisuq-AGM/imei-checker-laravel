@@ -16,7 +16,7 @@
             <h1>Result</h1>
             <p>IMEI: {{ $data['imei'] }}</p>
             @foreach ($object as $key => $value)
-                <p>{{ ucfirst($key) }}: {{ $value }}</p>
+                <p>{{ ucfirst($key) }}: {!! $value !!}</p>
             @endforeach
         </div>
         <p>
