@@ -47,6 +47,9 @@ class ImeiController extends Controller
                 'imei' => $imei
             ]);
 
+            // $data = $response->json();
+            // dd($data);
+
             // Check if the request was successful
             if (isset($data['status']) && $data['status'] === 'error') {
                 // Handle credit error or other errors
