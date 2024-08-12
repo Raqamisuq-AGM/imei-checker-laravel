@@ -3,7 +3,7 @@
     <div class="container-xl max-w-screen-xl">
         <!-- Logo -->
         <a class="navbar-brand" href="/">
-            <img src="https://preview.webpixels.io/web/img/logos/clever-primary.svg" class="h-10" alt="..." />
+            <img src="{{ asset('img/logo.png') }}" class="h-10" alt="..." style="width: 250px;" />
         </a>
         <!-- Navbar toggle -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
