@@ -53,8 +53,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name('imei.checking');
 Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name('imei.checking.result');
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
-Route::get('/buy-credit', [FrontendController::class, 'buyCredit'])->name('buy.credit');
-Route::get('/checkout/{type}', [FrontendController::class, 'checkout'])->name('checkout');
+Route::get('/add-fund', [FrontendController::class, 'buyCredit'])->name('buy.credit');
+Route::post('/add-fund', [FrontendController::class, 'addFund'])->name('buy.credit.fund');
+Route::get('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
 // Strip Route
 Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 

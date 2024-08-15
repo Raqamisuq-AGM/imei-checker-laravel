@@ -6,59 +6,41 @@
     <div class="container ">
         <div class="row justify-content-center align-items-center" style="min-height: 80vh">
             <div class="col-md-8">
-                <h1>Buy Credit</h1>
-                <section class="pricing py-5" id="pricing-sec" style="background: transparent;">
+                <h1>Add fund</h1>
+
+                <section class="pricing" id="pricing-sec" style="background: transparent;">
                     <div class="container">
-                        <div class="row">
-                            <!-- Free Tier -->
-                            <div class="col-lg-4">
-                                <div class="card mb-5 mb-lg-0">
-                                    <div class="card-body">
-                                        <hr />
-                                        <ul class="fa-ul">
-                                            <li>10 Credits / $1</li>
-                                        </ul>
-                                        <div class="d-grid">
-                                            <a href="{{ route('checkout', ['type' => 'basic']) }}"
-                                                class="btn btn-primary text-uppercase">Buy</a>
-                                        </div>
-                                    </div>
-                                </div>
+                        <form id="fund-form" action="{{ route('buy.credit.fund') }}" method="post">
+                            @csrf
+                            <label for="fund-amount">Enter amount $5 - $500</label>
+                            <input type="text" name="fund-amount" id="fund-amount" class="form-control" required>
+                            <div id="error-message" style="color: red; display: none;">Please enter an amount between $5 and
+                                $500.</div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Add Fund</button>
                             </div>
-                            <!-- Plus Tier -->
-                            <div class="col-lg-4">
-                                <div class="card mb-5 mb-lg-0">
-                                    <div class="card-body">
-                                        <hr />
-                                        <ul class="fa-ul">
-                                            <li>30 Credits / $3</li>
-                                        </ul>
-                                        <div class="d-grid">
-                                            <a href="{{ route('checkout', ['type' => 'standard']) }}"
-                                                class="btn btn-primary text-uppercase">Buy</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Pro Tier -->
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <hr />
-                                        <ul class="fa-ul">
-                                            <li>50 Credits / $5</li>
-                                        </ul>
-                                        <div class="d-grid">
-                                            <a href="{{ route('checkout', ['type' => 'advanced']) }}"
-                                                class="btn btn-primary text-uppercase">Buy</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </section>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        document.getElementById('fund-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fundAmount = parseFloat(document.getElementById('fund-amount').value);
+            const errorMessage = document.getElementById('error-message');
+
+            if (fundAmount >= 5 && fundAmount <= 500) {
+                errorMessage.style.display = 'none';
+                this.submit(); // Submit the form if validation is successful
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
 @endsection

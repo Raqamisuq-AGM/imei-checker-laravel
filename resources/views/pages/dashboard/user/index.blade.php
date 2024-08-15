@@ -44,12 +44,12 @@
                         <div class="inner">
                             <h3>${{ $credit }}</h3>
 
-                            <p>Creadits</p>
+                            <p>Funds</p>
                         </div>
                         <div class="icon">
                             <i class="nav-icon fas fa-user"></i>
                         </div>
-                        <a href="{{ route('checkout', ['type' => 'advanced']) }}" class="small-box-footer">Buy more <i
+                        <a href="{{ route('buy.credit') }}" class="small-box-footer">Buy more <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
