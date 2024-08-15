@@ -129,7 +129,7 @@
                     <div class="p-3 bg-light bg-opacity-10">
                         <h6 class="card-title mb-3">Order Summary</h6>
                         <div class="d-flex justify-content-between mb-4 small">
-                            <span>TOTAL</span> <strong class="text-dark">${{ session('amount') }}</strong>
+                            <span>TOTAL</span> <strong class="text-dark">${{ session('fund-amount') }}</strong>
                         </div>
                         <div class="form-check mb-1 small">
                             <input class="form-check-input" type="checkbox" value="" id="tnc" checked>

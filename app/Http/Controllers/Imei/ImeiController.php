@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Credit;
 use App\Models\Imei;
 use App\Models\ImeiLimit;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -16,6 +17,8 @@ class ImeiController extends Controller
     //checking method
     public function checkingImei(Request $request)
     {
+
+
         $userIp = request()->ip();
         $imei = $request->input('imei');
 
@@ -39,6 +42,68 @@ class ImeiController extends Controller
         // Construct the API URL
         $url = "https://alpha.imeicheck.com/api/php-api/create";
 
+
+        $serviceId = $request->input('service_id');
+        $service = Service::where('id', $request->input('service_id'))->first();
+        $servicePrice = $service->price;
+
+        $paidServiceIds = [4, 5, 14, 16, 19];
+
+        // Check if the selected service is a paid service
+        // Paid service check
+        if (in_array($serviceId, $paidServiceIds)) {
+            if (!auth()->check()) {
+                // Redirect to the login page if the user is not logged in
+                return redirect()->back()->with('warning', 'This is a paid service.');
+            } else {
+                if ($credit > $servicePrice) {
+                    // Make the HTTP request
+                    $response = Http::get($url, [
+                        'key' => $apiKey,
+                        'service' => $serviceId,
+                        'imei' => $imei
+                    ]);
+
+                    // Check if the request was successful
+                    if (isset($data['status']) && $data['status'] === 'error') {
+                        // Handle credit error or other errors
+                        toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                        // return redirect()->route('imei.checking.result')->with('error', $data['response']);
+                    } else if ($response->successful()) {
+                        // Decode the JSON response into an array
+                        $data = $response->json();
+                        if ($data['status'] == 'error') {
+                            toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                            return back();
+                        } else {
+
+
+
+                            $userCredit->credit = $credit - $servicePrice;
+                            $userCredit->save();
+
+                            $iemies = new Imei();
+                            $iemies->user_id = $user->id;
+                            $iemies->imei = $request->input('imei');
+                            $iemies->result = isset($data['object']) ? json_encode($data['object']) : null;
+                            $iemies->save();
+
+                            Session::put('imei_result', $data);
+                            return redirect()->route('imei.checking.result');
+                        }
+                    } else {
+                        // Handle the error, you can also log the error message
+                        toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                        return back();
+                    }
+                } else {
+                    return redirect()->route('imei.out.credit');
+                }
+            }
+        }
+
+
+        // Regular service check
         if ($dailyCredit > 0) {
             // Make the HTTP request
             $response = Http::get($url, [
@@ -82,7 +147,7 @@ class ImeiController extends Controller
                 return back();
             }
             // return redirect()->route('imei.checking.result');
-        } else if ($credit > 0) {
+        } else if ($credit > $servicePrice) {
 
             // Make the HTTP request
             $response = Http::get($url, [
@@ -103,7 +168,10 @@ class ImeiController extends Controller
                     toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                     return back();
                 } else {
-                    $userCredit->credit = $credit - 1;
+
+
+
+                    $userCredit->credit = $credit - $servicePrice;
                     $userCredit->save();
 
                     $iemies = new Imei();

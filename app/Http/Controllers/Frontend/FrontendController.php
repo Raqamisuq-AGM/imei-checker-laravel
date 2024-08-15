@@ -9,6 +9,7 @@ use App\Models\ContactMessage;
 use App\Models\Credit;
 use App\Models\Imei;
 use App\Models\ImeiLimit;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +54,7 @@ class FrontendController extends Controller
             $limit = new ImeiLimit();
             $limit->user_id = $user->id;
             $limit->ip = $userIp;
-            $limit->limit = '5';
+            $limit->limit = '3';
             $limit->save();
 
             // Create the user limit
@@ -83,7 +84,7 @@ class FrontendController extends Controller
             $limit = new ImeiLimit();
             $limit->user_id = $user->id;
             $limit->ip = $userIp;
-            $limit->limit = '5';
+            $limit->limit = '3';
             $limit->save();
 
             // Create the user limit
@@ -112,7 +113,7 @@ class FrontendController extends Controller
             $limit = new ImeiLimit();
             $limit->user_id = $user->id;
             $limit->ip = $userIp;
-            $limit->limit = '5';
+            $limit->limit = '3';
             $limit->save();
 
             // Create the user limit
@@ -142,7 +143,7 @@ class FrontendController extends Controller
             $limit = new ImeiLimit();
             $limit->user_id = $user->id;
             $limit->ip = $userIp;
-            $limit->limit = '5';
+            $limit->limit = '3';
             $limit->save();
 
             // Create the user limit
@@ -152,12 +153,21 @@ class FrontendController extends Controller
             $credit->ip = $userIp;
             $credit->save();
         }
-        return view('pages.frontend.imei-checker.imei-checker');
+
+        $services = Service::all();
+        return view('pages.frontend.imei-checker.imei-checker', compact('services'));
     }
 
     //buy credit Check method
     public function buyCredit()
     {
+
+        // Check if the user is logged in
+        if (!auth()->check()) {
+            // Redirect to the login page if the user is not logged in
+            return redirect()->route('login');
+        }
+
         $userIp = request()->ip();
         $user = User::where('ip', $userIp)->first();
         if ($user == null) {
@@ -170,7 +180,7 @@ class FrontendController extends Controller
             $limit = new ImeiLimit();
             $limit->user_id = $user->id;
             $limit->ip = $userIp;
-            $limit->limit = '5';
+            $limit->limit = '3';
             $limit->save();
 
             // Create the user limit
@@ -183,44 +193,34 @@ class FrontendController extends Controller
         return view('pages.frontend.credit.buy');
     }
 
-    //checkout method
-    public function checkout(Request $request, $type)
+    public function addFund(Request $request)
     {
-        if ($type == 'basic') {
-            $request->session()->put('amount', '1');
-            $request->session()->put('credits', '10');
-        } else if ($type == 'standard') {
-            $request->session()->put('amount', '3');
-            $request->session()->put('credits', '30');
-        } else if ($type == 'advanced') {
-            $request->session()->put('amount', '5');
-            $request->session()->put('credits', '50');
+
+        // Check if the user is logged in
+        if (!auth()->check()) {
+            // Redirect to the login page if the user is not logged in
+            return redirect()->route('login');
+        }
+
+        $request->validate([
+            'fund-amount' => 'required|numeric|min:5|max:500',
+        ]);
+
+        // Store the validated amount in the session
+        $amount = $request->input('fund-amount');
+        $request->session()->put('fund-amount', $amount);
+
+        return redirect()->route('checkout');
+    }
+
+    //checkout method
+    public function checkout(Request $request)
+    {
+        if ($request->session()->has('fund-amount')) {
+            return view('pages.frontend.checkout.checkout');
         } else {
             return redirect()->route('index');
         }
-        $userIp = request()->ip();
-        $user = User::where('ip', $userIp)->first();
-        if ($user == null) {
-            // Create the user
-            $user = new User();
-            $user->ip = $userIp;
-            $user->save();
-
-            // Create the user limit
-            $limit = new ImeiLimit();
-            $limit->user_id = $user->id;
-            $limit->ip = $userIp;
-            $limit->limit = '5';
-            $limit->save();
-
-            // Create the user limit
-            $credit = new Credit();
-            $credit->user_id = $user->id;
-            $credit->credit = '0';
-            $credit->ip = $userIp;
-            $credit->save();
-        }
-        return view('pages.frontend.checkout.checkout', compact('type'));
     }
 
     //contact us message submit method

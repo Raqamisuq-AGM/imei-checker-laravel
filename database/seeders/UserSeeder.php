@@ -41,14 +41,14 @@ class UserSeeder extends Seeder
         ImeiLimit::create([
             'ip' => '127.0.0.1',
             'user_id' => $user->id,
-            'limit' => '5', // Replace with actual IMEI
+            'limit' => '3', // Replace with actual IMEI
         ]);
 
         // Create Credit for the last created user
         Credit::create([
             'ip' => '127.0.0.1',
             'user_id' => $user->id,
-            'credit' => '0', // Replace with actual IMEI
+            'credit' => '0',
         ]);
     }
 }
