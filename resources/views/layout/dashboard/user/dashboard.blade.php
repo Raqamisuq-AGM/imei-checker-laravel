@@ -8,6 +8,9 @@
 
     {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img') . '/' . $system[0]->fav }}" /> --}}
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />

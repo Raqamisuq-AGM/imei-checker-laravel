@@ -9,6 +9,8 @@
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('asset/frontend/style.css') }}" />
     @yield('styles')
 </head>
