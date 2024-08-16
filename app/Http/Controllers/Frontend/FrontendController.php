@@ -247,7 +247,7 @@ class FrontendController extends Controller
         $contactMessage->save();
 
         // Send the messages via email
-        Mail::to('raqamisuq@gmail.com')->send(new ContactEmail($request->input('name'), $request->input('email'), $request->input('subject'), $request->input('message')));
+        Mail::to('superusercheckimeipro@gmail.com')->send(new ContactEmail($request->input('name'), $request->input('email'), $request->input('subject'), $request->input('message')));
 
         //return success message with tostr
         toastr()->success('Your message submitted successfully. We will contact you soon', 'success', ['timeOut' => 5000, 'closeButton' => true]);
