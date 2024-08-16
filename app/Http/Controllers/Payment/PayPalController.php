@@ -69,8 +69,10 @@ class PayPalController extends Controller
                 //update credit
                 $userIp = request()->ip();
                 $credit = Credit::where('ip', $userIp)->first();
-                $credit->credit = $credit->credit + session('credits');
+                $credit->credit = $credit->credit + session('fund-amount');
                 $credit->save();
+
+                $request->session()->put('fund-amount', '0');
 
                 toastr()->success('Payment successful!', ['timeOut' => 5000, 'closeButton' => true]);
 
