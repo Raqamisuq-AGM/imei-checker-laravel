@@ -20,7 +20,7 @@
                         <select class="form-control mob-select custom-select" id="serviceSelect" name="service_id" required>
                             <option value="">Please select a Service</option>
                             @foreach ($services as $service)
-                                <option value="{{ $service->id }}">
+                                <option value="{{ $service->service_id }}">
                                     ${{ $service->price }} - {{ $service->title }}
                                 </option>
                             @endforeach

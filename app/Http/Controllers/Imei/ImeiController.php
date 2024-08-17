@@ -17,8 +17,7 @@ class ImeiController extends Controller
     //checking method
     public function checkingImei(Request $request)
     {
-
-
+        // dd($request->input('service_id'));
         $userIp = request()->ip();
         $imei = $request->input('imei');
 
@@ -34,13 +33,23 @@ class ImeiController extends Controller
 
 
         // Define your API key, service ID, and the IMEI/SN
-        $apiKey = 'fyHBj-1vGss-eRlmP-jpFD5-kYirc-WNYNm';
+        $apiKey = 'tNhtv-7BWra-UwD4Q-dPpET-r7om7-EBKq7';
         // $apiKey = env('IMEI_CHECK_API ');
         $serviceId = $request->input('service_id');
         $imei = $request->input('imei');
 
         // Construct the API URL
         $url = "https://alpha.imeicheck.com/api/php-api/create";
+
+        // $response = Http::get($url, [
+        //     'key' => $apiKey,
+        //     'service' => '10',
+        //     'imei' => $imei
+        // ]);
+
+        // $data = $response->json();
+
+        // dd($data);
 
 
         $serviceId = $request->input('service_id');
@@ -67,17 +76,22 @@ class ImeiController extends Controller
                     // Check if the request was successful
                     if (isset($data['status']) && $data['status'] === 'error') {
                         // Handle credit error or other errors
-                        toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                        // return redirect()->route('imei.checking.result')->with('error', $data['response']);
+                        toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                        return back();
+                    } else if (isset($data['status']) && $data['status'] === 'failed') {
+                        // Handle credit error or other errors
+                        toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
+                        return back();
                     } else if ($response->successful()) {
                         // Decode the JSON response into an array
                         $data = $response->json();
                         if ($data['status'] == 'error') {
-                            toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                            toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                            return back();
+                        } else if ($data['status'] == 'failed') {
+                            toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                             return back();
                         } else {
-
-
 
                             $userCredit->credit = $credit - $servicePrice;
                             $userCredit->save();
@@ -93,7 +107,7 @@ class ImeiController extends Controller
                         }
                     } else {
                         // Handle the error, you can also log the error message
-                        toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                        toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                         return back();
                     }
                 } else {
@@ -101,7 +115,6 @@ class ImeiController extends Controller
                 }
             }
         }
-
 
         // Regular service check
         if ($dailyCredit > 0) {
@@ -112,21 +125,25 @@ class ImeiController extends Controller
                 'imei' => $imei
             ]);
 
-            // $data = $response->json();
-            // dd($data);
-
             // Check if the request was successful
             if (isset($data['status']) && $data['status'] === 'error') {
                 // Handle credit error or other errors
-                toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                 return back();
                 // return redirect()->route('imei.checking.result')->with('error', $data['response']);
+            } else if (isset($data['status']) && $data['status'] === 'failed') {
+                toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
+                return back();
             } else if ($response->successful()) {
                 // Decode the JSON response into an array
                 $data = $response->json();
 
                 if ($data['status'] == 'error') {
-                    toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+
+                    toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                    return back();
+                } else if ($data['status'] === 'failed') {
+                    toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                     return back();
                 } else {
                     $freeCredit->limit = $dailyCredit - 1;
@@ -143,7 +160,7 @@ class ImeiController extends Controller
                 }
             } else {
                 // Handle the error, you can also log the error message
-                toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                 return back();
             }
             // return redirect()->route('imei.checking.result');
@@ -159,17 +176,22 @@ class ImeiController extends Controller
             // Check if the request was successful
             if (isset($data['status']) && $data['status'] === 'error') {
                 // Handle credit error or other errors
-                toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                // return redirect()->route('imei.checking.result')->with('error', $data['response']);
+            } else if (isset($data['status']) && $data['status'] === 'failed') {
+                // Handle credit error or other errors
+                toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                 // return redirect()->route('imei.checking.result')->with('error', $data['response']);
             } else if ($response->successful()) {
                 // Decode the JSON response into an array
                 $data = $response->json();
                 if ($data['status'] == 'error') {
-                    toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                    toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                    return back();
+                } else if ($data['status'] == 'failed') {
+                    toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                     return back();
                 } else {
-
-
 
                     $userCredit->credit = $credit - $servicePrice;
                     $userCredit->save();
@@ -185,7 +207,7 @@ class ImeiController extends Controller
                 }
             } else {
                 // Handle the error, you can also log the error message
-                toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                 return back();
             }
         } else {
@@ -198,10 +220,12 @@ class ImeiController extends Controller
     {
         // Retrieve the data from session
         $data = Session::get('imei_result');
+        $services = Service::all();
         if ($data) {
             return view('pages.frontend.imei-checker.checking-result', [
                 'data' => $data,
-                'object' => $data['object']
+                'object' => $data['object'],
+                'services' => $services
             ]);
         } else {
             toastr()->success('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
