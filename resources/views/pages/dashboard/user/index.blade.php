@@ -28,7 +28,7 @@
                         <div class="inner">
                             <h3>{{ $checked }}</h3>
 
-                            <p>IEMI Checked</p>
+                            <p>IMEI Checked</p>
                         </div>
                         <div class="icon">
                             <i class="nav-icon fas fa-th"></i>

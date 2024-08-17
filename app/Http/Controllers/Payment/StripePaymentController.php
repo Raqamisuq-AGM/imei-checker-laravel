@@ -19,23 +19,32 @@ class StripePaymentController extends Controller
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        Stripe\Charge::create([
-            "amount" => session('fund-amount') * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => "Test payment"
-        ]);
+        try {
+            // Attempt to charge the card
+            Stripe\Charge::create([
+                "amount" => 5 * 100,
+                "currency" => "USD",
+                "source" => $request->stripeToken,
+                "description" => "IMEI Fund Add"
+            ]);
 
-        //update credit
-        $userIp = request()->ip();
-        $credit = Credit::where('ip', $userIp)->first();
-        $credit->credit = $credit->credit + session('fund-amount');
-        $credit->save();
+            // Update credit
+            $userIp = $request->ip();
+            $credit = Credit::where('ip', $userIp)->first();
+            if ($credit) {
+                $credit->credit += session('fund-amount');
+                $credit->save();
+            }
 
-        $request->session()->put('fund-amount', '0');
+            $request->session()->put('fund-amount', '0');
 
-        toastr()->success('Payment successful!', ['timeOut' => 5000, 'closeButton' => true]);
+            toastr()->success('Payment successful!', ['timeOut' => 5000, 'closeButton' => true]);
 
-        return redirect()->route('dashboard.index');
+            return redirect()->route('dashboard.index');
+        } catch (\Stripe\Exception\CardException $e) {
+            // Handle the error
+            toastr()->error('Payment failed: ' . $e->getError()->message, ['timeOut' => 5000, 'closeButton' => true]);
+            return redirect()->route('checkout')->withErrors(['error' => 'Payment failed: ' . $e->getError()->message]);
+        }
     }
 }
