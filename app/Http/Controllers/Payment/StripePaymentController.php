@@ -22,7 +22,7 @@ class StripePaymentController extends Controller
         try {
             // Attempt to charge the card
             Stripe\Charge::create([
-                "amount" => 5 * 100,
+                "amount" => session('fund-amount') * 100,
                 "currency" => "USD",
                 "source" => $request->stripeToken,
                 "description" => "IMEI Fund Add"
