@@ -56,14 +56,14 @@ class ImeiController extends Controller
         $service = Service::where('id', $request->input('service_id'))->first();
         $servicePrice = $service->price;
 
-        $paidServiceIds = [4, 5, 14, 16, 19];
+        $paidServiceIds = [7, 9, 12, 18, 19, 21, 39, 40, 43, 44, 46, 47, 54];
 
         // Check if the selected service is a paid service
         // Paid service check
         if (in_array($serviceId, $paidServiceIds)) {
             if (!auth()->check()) {
                 // Redirect to the login page if the user is not logged in
-                return redirect()->back()->with('warning', 'This is a paid service.');
+                return redirect()->back()->with('warning', 'This is a paid service.you have to login first.');
             } else {
                 if ($credit > $servicePrice) {
                     // Make the HTTP request
