@@ -12,9 +12,9 @@
                     <div class="container">
                         <form id="fund-form" action="{{ route('buy.credit.fund') }}" method="post">
                             @csrf
-                            <label for="fund-amount">Enter amount $5 - $500</label>
+                            <label for="fund-amount">Enter amount $2 - $500</label>
                             <input type="text" name="fund-amount" id="fund-amount" class="form-control" required>
-                            <div id="error-message" style="color: red; display: none;">Please enter an amount between $5 and
+                            <div id="error-message" style="color: red; display: none;">Please enter an amount between $2 and
                                 $500.</div>
                             <div class="d-grid mt-4">
                                 <button type="submit" class="btn btn-primary">Add Fund</button>
@@ -35,7 +35,7 @@
             const fundAmount = parseFloat(document.getElementById('fund-amount').value);
             const errorMessage = document.getElementById('error-message');
 
-            if (fundAmount >= 5 && fundAmount <= 500) {
+            if (fundAmount >= 2 && fundAmount <= 500) {
                 errorMessage.style.display = 'none';
                 this.submit(); // Submit the form if validation is successful
             } else {
