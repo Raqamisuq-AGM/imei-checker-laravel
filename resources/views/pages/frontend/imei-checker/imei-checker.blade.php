@@ -44,28 +44,106 @@
                         </div>
                     </div>
                 </form>
+                <div class="example-btn">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Show Example</button>
+                </div>
             </div>
         </div>
     </div>
-@endsection
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Example IMEI Check</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre id="imeiDetails">
+<strong>PCB:</strong> 1822668E2B11165110000484
+<strong>Model:</strong> Realme 10 ProMY(8+256)
+<strong>IMEI:</strong> 865017060108659
+<strong>IMEI2:</strong> 865017060108642
+<strong>Material:</strong> 6054828
+<strong>Color:</strong> Nebula Blue
+<strong>Ram Capacity:</strong> 8GB
+<strong>Rom Capacity:</strong> 256GB
+<strong>Manufacture Date:</strong> 2022-11-21 06:43:00
+<strong>Product Version:</strong> VU.1
+<strong>Software Version:</strong> V2.0
+<strong>Battery SN:</strong> 9561583B416XAP983245221057688
+<strong>Adaptor SN:</strong> 5474178B791H122423BA1510252
+<strong>Brand:</strong> realme
+<strong>Project Code:</strong> 22668MY
+<strong>Purchase Country:</strong> Malaysia
+<strong>Warranty Status:</strong> Warranty Expired
+<strong>Warranty Start Date:</strong> 2023-02-19 06:43:00
+<strong>Warranty End Date:</strong> 2024-02-19 06:43:00
+<strong>Warranty Validity:</strong> 365 days
+                    </pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="copyButton">Copy Result</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{{-- @section('script')
+    <!-- Toast Notification -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <div class="toast" id="copyToast" style="position: fixed; top: 20px; right: 20px;" data-delay="3000">
+            <div class="toast-header">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                <!-- Message will be set by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional: Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript for Copying Text to Clipboard and Showing Toast -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const serviceSelect = document.getElementById('serviceSelect');
-            const paidServiceMessage = document.getElementById('paidServiceMessage');
+        document.getElementById('copyButton').addEventListener('click', function() {
+            // Select the text inside the <pre> tag
+            var imeiDetails = document.getElementById('imeiDetails');
+            var range = document.createRange();
+            range.selectNodeContents(imeiDetails);
+            var selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
 
-            serviceSelect.addEventListener('change', function() {
-                const selectedValue = parseInt(serviceSelect.value);
-                const paidServiceIds = [4, 5, 14, 16, 19];
+            // Copy the text to clipboard
+            var success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                success = false;
+            }
 
-                if (paidServiceIds.includes(selectedValue)) {
-                    paidServiceMessage.style.display = 'block';
-                } else {
-                    paidServiceMessage.style.display = 'none';
-                }
-            });
+            // Deselect the text
+            selection.removeAllRanges();
+
+            // Show toast notification
+            var toastMessage = document.getElementById('toastMessage');
+            if (success) {
+                toastMessage.textContent = 'IMEI details copied to clipboard!';
+            } else {
+                toastMessage.textContent = 'Failed to copy text';
+            }
+
+            $('#copyToast').toast('show');
         });
     </script>
-@endsection --}}
+@endsection
