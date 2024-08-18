@@ -203,7 +203,7 @@ class FrontendController extends Controller
         }
 
         $request->validate([
-            'fund-amount' => 'required|numeric|min:5|max:500',
+            'fund-amount' => 'required|numeric|min:3|max:500',
         ]);
 
         // Store the validated amount in the session
