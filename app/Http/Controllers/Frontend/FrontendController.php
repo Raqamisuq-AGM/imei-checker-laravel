@@ -154,7 +154,9 @@ class FrontendController extends Controller
             $credit->save();
         }
 
-        $services = Service::all();
+        $services = Service::all()->sortBy(function ($service) {
+            return $service->price > 0;
+        });
         return view('pages.frontend.imei-checker.imei-checker', compact('services'));
     }
 

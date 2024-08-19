@@ -129,7 +129,9 @@ class ImeiController extends Controller
     {
         // Retrieve the data from session
         $data = Session::get('imei_result');
-        $services = Service::all();
+        $services = Service::all()->sortBy(function ($service) {
+            return $service->price > 0;
+        });
         if ($data) {
             return view('pages.frontend.imei-checker.checking-result', [
                 'data' => $data,
