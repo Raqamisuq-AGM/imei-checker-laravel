@@ -14,6 +14,8 @@ class DashboardController extends Controller
     {
         $imeiCount = Imei::count();
         $userCount = User::where('type', '!=', 'admin')->count();
-        return view('pages.dashboard.admin.index', compact('imeiCount', 'userCount'));
+        $items = Imei::with('userImeis')->orderBy('id', 'desc')->paginate(5);
+        // dd($items[0]->userImeis->name);
+        return view('pages.dashboard.admin.index', compact('imeiCount', 'userCount', 'items'));
     }
 }

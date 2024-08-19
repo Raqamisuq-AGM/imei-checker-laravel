@@ -14,14 +14,19 @@
                     yourself from buying or using stolen or blacklisted devices! All
                     Brands / Devices supported, including Apple, iPhone and Samsung.
                 </p>
-                <form action="{{ route('imei.checking') }}" method="post">
+                <form id="imeiForm" action="{{ route('imei.checking') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <select class="form-control mob-select custom-select" id="serviceSelect" name="service_id" required>
+                        <select class="form-control mob-select custom-select" id="serviceSelect" name="service_id" required
+                            style="font-size: 16px;">
                             <option value="">Please select a Service</option>
                             @foreach ($services as $service)
-                                <option value="{{ $service->service_id }}">
-                                    ${{ $service->price }} - {{ $service->title }}
+                                <option value="{{ $service->service_id }}" data-price="{{ $service->price }}">
+                                    @if ($service->price == '0')
+                                        Free
+                                    @else
+                                        {{ $service->price }}
+                                    @endif - {{ $service->title }}
                                 </option>
                             @endforeach
                         </select>
@@ -63,28 +68,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <pre id="imeiDetails">
-<strong>PCB:</strong> 1822668E2B11165110000484
-<strong>Model:</strong> Realme 10 ProMY(8+256)
-<strong>IMEI:</strong> 865017060108659
-<strong>IMEI2:</strong> 865017060108642
-<strong>Material:</strong> 6054828
-<strong>Color:</strong> Nebula Blue
-<strong>Ram Capacity:</strong> 8GB
-<strong>Rom Capacity:</strong> 256GB
-<strong>Manufacture Date:</strong> 2022-11-21 06:43:00
-<strong>Product Version:</strong> VU.1
-<strong>Software Version:</strong> V2.0
-<strong>Battery SN:</strong> 9561583B416XAP983245221057688
-<strong>Adaptor SN:</strong> 5474178B791H122423BA1510252
-<strong>Brand:</strong> realme
-<strong>Project Code:</strong> 22668MY
-<strong>Purchase Country:</strong> Malaysia
-<strong>Warranty Status:</strong> Warranty Expired
-<strong>Warranty Start Date:</strong> 2023-02-19 06:43:00
-<strong>Warranty End Date:</strong> 2024-02-19 06:43:00
-<strong>Warranty Validity:</strong> 365 days
-                    </pre>
+                    <div id="imeiDetails">
+                        <div><strong>PCB:</strong> 1822668E2B11165110000484</div>
+                        <div><strong>Model:</strong> Realme 10 ProMY(8+256)</div>
+                        <div><strong>IMEI:</strong> 865017060108659</div>
+                        <div><strong>IMEI2:</strong> 865017060108642</div>
+                        <div><strong>Material:</strong> 6054828</div>
+                        <div><strong>Color:</strong> Nebula Blue</div>
+                        <div><strong>Ram Capacity:</strong> 8GB</div>
+                        <div><strong>Rom Capacity:</strong> 256GB</div>
+                        <div><strong>Manufacture Date:</strong> 2022-11-21 06:43:00</div>
+                        <div><strong>Product Version:</strong> VU.1</div>
+                        <div><strong>Software Version:</strong> V2.0</div>
+                        <div><strong>Battery SN:</strong> 9561583B416XAP983245221057688</div>
+                        <div><strong>Adaptor SN:</strong> 5474178B791H122423BA1510252</div>
+                        <div><strong>Brand:</strong> realme</div>
+                        <div><strong>Project Code:</strong> 22668MY</div>
+                        <div><strong>Purchase Country:</strong> Malaysia</div>
+                        <div><strong>Warranty Status:</strong> Warranty Expired</div>
+                        <div><strong>Warranty Start Date:</strong> 2023-02-19 06:43:00</div>
+                        <div><strong>Warranty End Date:</strong> 2024-02-19 06:43:00</div>
+                        <div><strong>Warranty Validity:</strong> 365 days</div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,6 +98,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Login/Signup Modal -->
+    <div class="modal fade" id="loginSignupModal" tabindex="-1" role="dialog" aria-labelledby="loginSignupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginSignupModalLabel">IMEI Check Result:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>SERVICE:</strong> Not Free</p>
+                    <p><strong>NEED:</strong> <a href="{{ route('signup') }}">Sign up</a> or <a
+                            href="{{ route('login') }}">Log in</a></p>
+                    <hr>
+                    <p><strong>Example:</strong></p>
+                    <p><strong>Manufacturer:</strong> Sony Mobile Communications</p>
+                    <p><strong>IMEI:</strong> 354805060130212</p>
+                    <p><strong>Warranty Status:</strong> Expired</p>
+                    <p><strong>Warranty Start Date:</strong> 11 October 2015</p>
+                    <p><strong>Device Age:</strong> 8 Years, 6 Months, 4 Days</p>
+                    <p><strong>Boot Loader Code:</strong> 6EA1A4A60CCF0E21</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Toast Notification -->
     <div aria-live="polite" aria-atomic="true" style="position: relative;">
@@ -144,6 +181,22 @@
             }
 
             $('#copyToast').toast('show');
+        });
+
+        // Check if the selected service is paid and the user is logged in
+        document.getElementById('imeiForm').addEventListener('submit', function(event) {
+            var serviceSelect = document.getElementById('serviceSelect');
+            var selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            var price = selectedOption.getAttribute('data-price');
+
+            if (price !== '0') { // This means it's a paid service
+                // Check if the user is logged in
+                var isLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
+                if (!isLoggedIn) {
+                    event.preventDefault(); // Prevent form submission
+                    $('#loginSignupModal').modal('show'); // Show login/signup modal
+                }
+            }
         });
     </script>
 @endsection

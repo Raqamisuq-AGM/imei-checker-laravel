@@ -16,7 +16,6 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $credit = 0;
-        $limit = 0;
         $checked = 0;
 
         // Get Credits
@@ -44,23 +43,8 @@ class DashboardController extends Controller
             $checked = 0; //
         }
 
-        // Get Daily Limit
-        if ($user) {
-            // Query the credits table to get the credit of the logged-in user
-            $limit = ImeiLimit::where('user_id', $user->id)->first();
+        $items = $user->imeis()->orderBy('id', 'desc')->paginate(5);
 
-            if ($limit) {
-                // Access the credit value
-                $limit = $limit->limit;
-                // Now you have $userCredit which contains the credit value for the logged-in user
-            } else {
-                // Handle case where no credit record is found for the user
-                $limit = 0;
-            }
-        } else {
-            $limit = 0; //
-        }
-
-        return view('pages.dashboard.user.index', compact('credit', 'limit', 'checked'));
+        return view('pages.dashboard.user.index', compact('credit', 'checked', 'items'));
     }
 }
