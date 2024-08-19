@@ -30,13 +30,15 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>IMEI</th>
+                                        <th>User</th>
+                                        <th>User IP</th>
                                         <th>Result</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($items->isEmpty())
                                         <tr>
-                                            <td colspan="3" class="text-center">No data found</td>
+                                            <td colspan="3" class="text-center">No IMEI checked yet</td>
                                         </tr>
                                     @else
                                         @foreach ($items as $key => $item)
@@ -44,18 +46,51 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $item->imei }}</td>
                                                 <td>
+                                                    @if ($item->userImeis->name == null)
+                                                        Guest User
+                                                    @else
+                                                        {{ $item->userImeis->name }}
+                                                    @endif
+                                                </td>
+                                                <td>{{ $item->userImeis->ip }}</td>
+                                                <td>
                                                     @php
                                                         $result = json_decode($item->result, true);
                                                     @endphp
+                                                    @if (isset($result['image']))
+                                                        <div class="image">
+                                                            {!! $result['image'] !!}
+                                                        </div>
+                                                    @endif
+                                                    @if (isset($result['thumbnail']))
+                                                        <div class="image">
+                                                            <img src="{!! $result['thumbnail'] !!}" alt=""
+                                                                style="width: 300px;">
+                                                        </div>
+                                                    @endif
                                                     @if ($result)
-                                                        <ul>
-                                                            @foreach ($result as $key => $value)
-                                                                <li><strong>{{ ucfirst($key) }}:</strong>
-                                                                    {{ $value }}</li>
-                                                            @endforeach
-                                                        </ul>
+                                                        @foreach ($result as $key => $value)
+                                                            @if ($key != 'image' && $key != 'thumbnail')
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{{ ucfirst($key) }}:</strong>
+                                                                        @if (is_bool($value))
+                                                                            <span style="color: red;">
+                                                                                {{ $value ? 'Yes' : 'No' }}
+                                                                            </span>
+                                                                        @elseif (is_null($value) || $value === '')
+                                                                            <span style="color: red;">
+                                                                                Not found
+                                                                            </span>
+                                                                        @else
+                                                                            {{ $value }}
+                                                                        @endif
+                                                                    </li>
+                                                                </ul>
+                                                            @endif
+                                                        @endforeach
                                                     @else
-                                                        No result data available
+                                                        <p>No additional details available.</p>
                                                     @endif
                                                 </td>
                                             </tr>

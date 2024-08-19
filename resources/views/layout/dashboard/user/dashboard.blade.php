@@ -35,6 +35,17 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/summernote/summernote-bs4.min.css') }}" />
 
+    <style>
+        [class*=sidebar-dark-] .sidebar a {
+            color: #625f6e !important;
+        }
+
+        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+        .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+            color: #fff !important;
+        }
+    </style>
+
     @yield('style')
 </head>
 

@@ -17,113 +17,30 @@ class ImeiController extends Controller
     //checking method
     public function checkingImei(Request $request)
     {
-        // dd($request->input('service_id'));
         $userIp = request()->ip();
         $imei = $request->input('imei');
-
-        $user = User::where('ip', $userIp)->first();
-        // dd($user->id);
-        // Daily Free Limit
-        $freeCredit = ImeiLimit::where('ip', $userIp)->first();
-        $dailyCredit = $freeCredit->limit;
-
-        // User Credit
-        $userCredit = Credit::where('ip', $userIp)->first();
-        $credit = $freeCredit->credit;
-
-
-        // Define your API key, service ID, and the IMEI/SN
-        $apiKey = 'tNhtv-7BWra-UwD4Q-dPpET-r7om7-EBKq7';
-        // $apiKey = env('IMEI_CHECK_API ');
         $serviceId = $request->input('service_id');
-        $imei = $request->input('imei');
-
+        // get the user
+        $user = User::where('ip', $userIp)->first();
+        // get User Credit/fund
+        $userCredit = Credit::where('ip', $userIp)->first();
+        $userFund = $userCredit->credit;
+        // get the service and service price
+        $service = Service::where('service_id', $request->input('service_id'))->first();
+        $servicePrice = $service->price;
+        // Define your API key
+        $apiKey = 'tNhtv-7BWra-UwD4Q-dPpET-r7om7-EBKq7';
         // Construct the API URL
         $url = "https://alpha.imeicheck.com/api/php-api/create";
 
-        // $response = Http::get($url, [
-        //     'key' => $apiKey,
-        //     'service' => '10',
-        //     'imei' => $imei
-        // ]);
-
-        // $data = $response->json();
-
-        // dd($data);
-
-
-        $serviceId = $request->input('service_id');
-        $service = Service::where('id', $request->input('service_id'))->first();
-        $servicePrice = $service->price;
-
-        $paidServiceIds = [7, 9, 12, 18, 19, 21, 39, 40, 43, 44, 46, 47, 54];
-
-        // Check if the selected service is a paid service
-        // Paid service check
-        if (in_array($serviceId, $paidServiceIds)) {
-            if (!auth()->check()) {
-                // Redirect to the login page if the user is not logged in
-                return redirect()->back()->with('warning', 'This is a paid service.you have to login first.');
-            } else {
-                if ($credit > $servicePrice) {
-                    // Make the HTTP request
-                    $response = Http::get($url, [
-                        'key' => $apiKey,
-                        'service' => $serviceId,
-                        'imei' => $imei
-                    ]);
-
-                    // Check if the request was successful
-                    if (isset($data['status']) && $data['status'] === 'error') {
-                        // Handle credit error or other errors
-                        toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                        return back();
-                    } else if (isset($data['status']) && $data['status'] === 'failed') {
-                        // Handle credit error or other errors
-                        toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
-                        return back();
-                    } else if ($response->successful()) {
-                        // Decode the JSON response into an array
-                        $data = $response->json();
-                        if ($data['status'] == 'error') {
-                            toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                            return back();
-                        } else if ($data['status'] == 'failed') {
-                            toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
-                            return back();
-                        } else {
-
-                            $userCredit->credit = $credit - $servicePrice;
-                            $userCredit->save();
-
-                            $iemies = new Imei();
-                            $iemies->user_id = $user->id;
-                            $iemies->imei = $request->input('imei');
-                            $iemies->result = isset($data['object']) ? json_encode($data['object']) : null;
-                            $iemies->save();
-
-                            Session::put('imei_result', $data);
-                            return redirect()->route('imei.checking.result');
-                        }
-                    } else {
-                        // Handle the error, you can also log the error message
-                        toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                        return back();
-                    }
-                } else {
-                    return redirect()->route('imei.out.credit');
-                }
-            }
-        }
-
-        // Regular service check
-        if ($dailyCredit > 0) {
-            // Make the HTTP request
+        if ($servicePrice == '0') {
             $response = Http::get($url, [
                 'key' => $apiKey,
                 'service' => $serviceId,
                 'imei' => $imei
             ]);
+
+            $data = $response->json();
 
             // Check if the request was successful
             if (isset($data['status']) && $data['status'] === 'error') {
@@ -135,19 +52,13 @@ class ImeiController extends Controller
                 toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                 return back();
             } else if ($response->successful()) {
-                // Decode the JSON response into an array
-                $data = $response->json();
-
                 if ($data['status'] == 'error') {
-
                     toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                     return back();
                 } else if ($data['status'] === 'failed') {
                     toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
                     return back();
                 } else {
-                    $freeCredit->limit = $dailyCredit - 1;
-                    $freeCredit->save();
 
                     $iemies = new Imei();
                     $iemies->user_id = $user->id;
@@ -159,59 +70,57 @@ class ImeiController extends Controller
                     return redirect()->route('imei.checking.result');
                 }
             } else {
-                // Handle the error, you can also log the error message
-                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                return back();
-            }
-            // return redirect()->route('imei.checking.result');
-        } else if ($credit > $servicePrice) {
-
-            // Make the HTTP request
-            $response = Http::get($url, [
-                'key' => $apiKey,
-                'service' => $serviceId,
-                'imei' => $imei
-            ]);
-
-            // Check if the request was successful
-            if (isset($data['status']) && $data['status'] === 'error') {
-                // Handle credit error or other errors
-                toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                // return redirect()->route('imei.checking.result')->with('error', $data['response']);
-            } else if (isset($data['status']) && $data['status'] === 'failed') {
-                // Handle credit error or other errors
-                toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
-                // return redirect()->route('imei.checking.result')->with('error', $data['response']);
-            } else if ($response->successful()) {
-                // Decode the JSON response into an array
-                $data = $response->json();
-                if ($data['status'] == 'error') {
-                    toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
-                    return back();
-                } else if ($data['status'] == 'failed') {
-                    toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
-                    return back();
-                } else {
-
-                    $userCredit->credit = $credit - $servicePrice;
-                    $userCredit->save();
-
-                    $iemies = new Imei();
-                    $iemies->user_id = $user->id;
-                    $iemies->imei = $request->input('imei');
-                    $iemies->result = isset($data['object']) ? json_encode($data['object']) : null;
-                    $iemies->save();
-
-                    Session::put('imei_result', $data);
-                    return redirect()->route('imei.checking.result');
-                }
-            } else {
-                // Handle the error, you can also log the error message
                 toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
                 return back();
             }
         } else {
-            return redirect()->route('imei.out.credit');
+            if ($userFund > 0) {
+
+                $response = Http::get($url, [
+                    'key' => $apiKey,
+                    'service' => $serviceId,
+                    'imei' => $imei
+                ]);
+
+                $data = $response->json();
+
+                // Check if the request was successful
+                if (isset($data['status']) && $data['status'] === 'error') {
+                    // Handle credit error or other errors
+                    toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                    return back();
+                    // return redirect()->route('imei.checking.result')->with('error', $data['response']);
+                } else if (isset($data['status']) && $data['status'] === 'failed') {
+                    toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
+                    return back();
+                } else if ($response->successful()) {
+                    if ($data['status'] == 'error') {
+                        toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                        return back();
+                    } else if ($data['status'] === 'failed') {
+                        toastr()->warning('Mobile not found', ['timeOut' => 5000, 'closeButton' => true]);
+                        return back();
+                    } else {
+
+                        $userCredit->credit = $userFund - $servicePrice;
+                        $userCredit->save();
+
+                        $iemies = new Imei();
+                        $iemies->user_id = $user->id;
+                        $iemies->imei = $request->input('imei');
+                        $iemies->result = isset($data['object']) ? json_encode($data['object']) : null;
+                        $iemies->save();
+
+                        Session::put('imei_result', $data);
+                        return redirect()->route('imei.checking.result');
+                    }
+                } else {
+                    toastr()->warning('Something went wrong, please try again later', ['timeOut' => 5000, 'closeButton' => true]);
+                    return back();
+                }
+            } else {
+                return redirect()->route('imei.out.credit');
+            }
         }
     }
 

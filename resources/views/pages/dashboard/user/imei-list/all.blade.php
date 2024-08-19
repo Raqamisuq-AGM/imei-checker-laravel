@@ -1,6 +1,6 @@
 @extends('layout.dashboard.user.dashboard')
 @section('title')
-    IMEI Lists
+    IMEI Results
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">IMEI Lists</h1>
+                    <h1 class="m-0">IMEI Results</h1>
                 </div>
             </div>
             <!-- /.row -->
@@ -36,7 +36,7 @@
                                 <tbody>
                                     @if ($items->isEmpty())
                                         <tr>
-                                            <td colspan="3" class="text-center">No data found</td>
+                                            <td colspan="3" class="text-center">No IMEI checked yet</td>
                                         </tr>
                                     @else
                                         @foreach ($items as $key => $item)
@@ -47,15 +47,40 @@
                                                     @php
                                                         $result = json_decode($item->result, true);
                                                     @endphp
+                                                    @if (isset($result['image']))
+                                                        <div class="image">
+                                                            {!! $result['image'] !!}
+                                                        </div>
+                                                    @endif
+                                                    @if (isset($result['thumbnail']))
+                                                        <div class="image">
+                                                            <img src="{!! $result['thumbnail'] !!}" alt=""
+                                                                style="width: 300px;">
+                                                        </div>
+                                                    @endif
                                                     @if ($result)
-                                                        <ul>
-                                                            @foreach ($result as $key => $value)
-                                                                <li><strong>{{ ucfirst($key) }}:</strong>
-                                                                    {{ $value }}</li>
-                                                            @endforeach
-                                                        </ul>
+                                                        @foreach ($result as $key => $value)
+                                                            @if ($key != 'image' && $key != 'thumbnail')
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{{ ucfirst($key) }}:</strong>
+                                                                        @if (is_bool($value))
+                                                                            <span style="color: red;">
+                                                                                {{ $value ? 'Yes' : 'No' }}
+                                                                            </span>
+                                                                        @elseif (is_null($value) || $value === '')
+                                                                            <span style="color: red;">
+                                                                                Not found
+                                                                            </span>
+                                                                        @else
+                                                                            {{ $value }}
+                                                                        @endif
+                                                                    </li>
+                                                                </ul>
+                                                            @endif
+                                                        @endforeach
                                                     @else
-                                                        No result data available
+                                                        <p>No additional details available.</p>
                                                     @endif
                                                 </td>
                                             </tr>

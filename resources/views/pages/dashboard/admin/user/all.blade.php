@@ -31,7 +31,7 @@
                                         <th>SL</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        <th>User IP</th>
                                         <th>IMEI Checked</th>
                                     </tr>
                                 </thead>
@@ -44,9 +44,21 @@
                                         @foreach ($items as $key => $item)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>{{ $item->phone }}</td>
+                                                <td>
+                                                    @if ($item->name == null)
+                                                        Guest
+                                                    @else
+                                                        {{ $item->name }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($item->email == null)
+                                                        N/A
+                                                    @else
+                                                        {{ $item->email }}
+                                                    @endif
+                                                </td>
+                                                <td>{{ $item->ip }}</td>
                                                 <td>{{ $item->imeis_count }}</td>
                                             </tr>
                                         @endforeach
