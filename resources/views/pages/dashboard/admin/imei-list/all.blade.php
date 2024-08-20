@@ -38,7 +38,7 @@
                                 <tbody>
                                     @if ($items->isEmpty())
                                         <tr>
-                                            <td colspan="3" class="text-center">No IMEI checked yet</td>
+                                            <td colspan="5" class="text-center">No IMEI checked yet</td>
                                         </tr>
                                     @else
                                         @foreach ($items as $key => $item)
@@ -106,25 +106,24 @@
                                             <!-- Previous Page Link -->
                                             @if ($items->onFirstPage())
                                                 <li class="page-item disabled" aria-disabled="true">
-                                                    <span class="page-link">@lang('lang.previous')</span>
+                                                    <span class="page-link">prev</span>
                                                 </li>
                                             @else
                                                 <li class="page-item">
                                                     <a class="page-link" href="{{ $items->previousPageUrl() }}"
-                                                        rel="prev">@lang('lang.previous')</a>
+                                                        rel="prev">prev</a>
                                                 </li>
                                             @endif
 
                                             <!-- Page links -->
                                             @foreach ($items->getUrlRange(1, $items->lastPage()) as $page => $url)
-                                                @if ($page == $user->currentPage())
+                                                @if ($page == $items->currentPage())
                                                     <li class="page-item active" aria-current="page">
                                                         <span class="page-link">{{ $page }}</span>
                                                     </li>
                                                 @else
                                                     <li class="page-item">
-                                                        <a class="page-link"
-                                                            href="{{ $url }}">{{ $page }}</a>
+                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                                     </li>
                                                 @endif
                                             @endforeach
@@ -133,11 +132,11 @@
                                             @if ($items->hasMorePages())
                                                 <li class="page-item">
                                                     <a class="page-link" href="{{ $items->nextPageUrl() }}"
-                                                        rel="next">@lang('lang.next')</a>
+                                                        rel="next">next</a>
                                                 </li>
                                             @else
                                                 <li class="page-item disabled" aria-disabled="true">
-                                                    <span class="page-link">@lang('lang.next')</span>
+                                                    <span class="page-link">next</span>
                                                 </li>
                                             @endif
                                         </ul>
