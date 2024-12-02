@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title')</title>
+    <meta property="description"
+        content="Check IMEI Number and Verify the authenticity of your device with our IMEI Checker. All Brands & Devices supported, including Apple | Samsung | Xiaomi | LG.">
+    <link rel="canonical" href="{{ url()->current() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,6 +15,11 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('asset/frontend/style.css') }}" />
+
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6778879320397925"
+        crossorigin="anonymous"></script>
+
     @yield('styles')
 </head>
 

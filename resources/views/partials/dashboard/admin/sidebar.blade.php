@@ -49,7 +49,7 @@
                         class="nav-link {{ request()->routeIs('admin.blog.all', 'admin.blog.create') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-blog"></i>
                         <p>
-                            Settings
+                            Blogs
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
