@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Imei\ImeiController as ImeiImeiController;
 use App\Http\Controllers\Payment\PayPalController;
 use App\Http\Controllers\Payment\StripePaymentController;
+use App\Http\Controllers\UniversalImeiCheckFreeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\ImeiController as UserImeiController;
 use App\Http\Controllers\User\SettingController as UserSettingController;
@@ -33,6 +34,7 @@ Route::post('/contact-us-submit', [FrontendController::class, 'contactUsSubmit']
 Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.detail');
 Route::get('/imei-check', [FrontendController::class, 'imeiCheck'])->name('imei-check');
+Route::post('/imei-check-uni', [UniversalImeiCheckFreeController::class, 'check'])->name('imei-check-uni');
 // Login Route
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -52,6 +54,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/checking-imei', [ImeiImeiController::class, 'checkingImei'])->name('imei.checking');
 Route::get('/imei-result', [ImeiImeiController::class, 'checkingResult'])->name('imei.checking.result');
+Route::get('/imei-result-uni', [UniversalImeiCheckFreeController::class, 'checkingResultUni'])->name('imei.checking.result-uni');
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
 Route::get('/add-fund', [FrontendController::class, 'buyCredit'])->name('buy.credit');
 Route::post('/add-fund', [FrontendController::class, 'addFund'])->name('buy.credit.fund');
