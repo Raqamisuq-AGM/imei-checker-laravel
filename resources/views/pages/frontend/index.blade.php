@@ -112,8 +112,8 @@
         <div class="container-xl">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-12">
-                    <p>
-                        Universal IMEI Check Free
+                    <p style="font-size: 25px; font-weight: 600;">
+                        Universal Model Check Free
                     </p>
                     <form id="imeiForm" action="{{ route('imei-check-uni') }}" method="post">
                         @csrf
@@ -313,7 +313,6 @@
                 <a href="https://icheckimeipro.info/imei-check">Check hardware specification</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check warranty</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check BLACKLIST status</a>,
-                <a href="https://icheckimeipro.info/imei-check">Check SimLock</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check SimLock</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check Specs</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check IMEI</a>,
