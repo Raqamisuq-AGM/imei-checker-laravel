@@ -22,7 +22,8 @@ class StripePaymentController extends Controller
             // Stripe\Stripe::setApiKey(env('STRIPE_SECRET_TEST'));
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            $YOUR_DOMAIN = 'http://localhost:8000/';
+            // $domain = 'http://localhost:8000/';
+            $domain = 'https://icheckimeipro.info/';
 
             $checkout_session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
@@ -37,8 +38,8 @@ class StripePaymentController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => $YOUR_DOMAIN . 'stripe/success/' . $request->stripe_amount,
-                'cancel_url' => $YOUR_DOMAIN . 'add-fund',
+                'success_url' => $domain . 'stripe/success/' . $request->stripe_amount,
+                'cancel_url' => $domain . 'add-fund',
             ]);
             return Redirect($checkout_session->url);
         } catch (\Stripe\Exception\CardException $e) {
