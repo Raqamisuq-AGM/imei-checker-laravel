@@ -8,3 +8,6 @@ RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
   AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
 </IfModule>
 # php -- END cPanel-generated handler, do not edit
+
+# Content Security Policy (CSP) Header
+Header set Content-Security-Policy "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com blob:; object-src 'none';"

@@ -15,6 +15,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('asset/frontend/style.css') }}" />
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6778879320397925"
