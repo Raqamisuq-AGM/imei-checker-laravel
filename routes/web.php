@@ -61,6 +61,7 @@ Route::post('/add-fund', [FrontendController::class, 'addFund'])->name('buy.cred
 Route::get('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
 // Strip Route
 Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+Route::get('/stripe/success/{amount}', [StripePaymentController::class, 'success'])->name('stripe.success');
 
 // Paypal Route
 Route::post('/paypal/pay', [PayPalController::class, 'pay'])->name('paypal.pay');

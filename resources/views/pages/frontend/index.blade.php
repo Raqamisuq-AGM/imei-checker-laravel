@@ -299,7 +299,7 @@
     {{-- Tags Section --}}
     <section class="ftco-section" style="padding: 2.5rem">
         <div class="container-xl">
-            <p>
+            <p style="font-weight: 600; font-size: 18px;">
                 Check IMEI Number and Verify the authenticity of your devices with our Premium IMEI Checker. Get instant and
                 real-time information of your device's Status ! All Brands & Devices are supported, including Apple | iPhone
                 | Samsung | OnePlus | Xiaomi and many more !
@@ -314,6 +314,7 @@
                 <a href="https://icheckimeipro.info/imei-check">Check warranty</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check BLACKLIST status</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check SimLock</a>,
+                <a href="https://icheckimeipro.info/imei-check">Check Model</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check Specs</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check IMEI</a>,
                 <a href="https://icheckimeipro.info/imei-check">Check MEID</a>,

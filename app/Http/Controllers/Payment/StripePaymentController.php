@@ -17,34 +17,51 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
         try {
             // Attempt to charge the card
-            Stripe\Charge::create([
-                "amount" => session('fund-amount') * 100,
-                "currency" => "USD",
-                "source" => $request->stripeToken,
-                "description" => "IMEI Fund Add"
+            // Stripe\Stripe::setApiKey(env('STRIPE_SECRET_TEST'));
+            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            $YOUR_DOMAIN = 'http://localhost:8000/';
+
+            $checkout_session = \Stripe\Checkout\Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => ' Add Fund to Icheck IMEI Pro',
+                        ],
+                        'unit_amount' => $request->stripe_amount * 100,
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => $YOUR_DOMAIN . 'stripe/success/' . $request->stripe_amount,
+                'cancel_url' => $YOUR_DOMAIN . 'add-fund',
             ]);
-
-            // Update credit
-            $userIp = $request->ip();
-            $credit = Credit::where('ip', $userIp)->first();
-            if ($credit) {
-                $credit->credit += session('fund-amount');
-                $credit->save();
-            }
-
-            $request->session()->put('fund-amount', '0');
-
-            toastr()->success('Payment successful!', ['timeOut' => 5000, 'closeButton' => true]);
-
-            return redirect()->route('dashboard.index');
+            return Redirect($checkout_session->url);
         } catch (\Stripe\Exception\CardException $e) {
             // Handle the error
             toastr()->error('Payment failed: ' . $e->getError()->message, ['timeOut' => 5000, 'closeButton' => true]);
-            return redirect()->route('checkout')->withErrors(['error' => 'Payment failed: ' . $e->getError()->message]);
+            return redirect()->route('buy.credit.fund')->withErrors(['error' => 'Payment failed: ' . $e->getError()->message]);
         }
+    }
+
+    public function success(Request $request, $amount)
+    {
+        // Update credit
+        $userIp = $request->ip();
+        $credit = Credit::where('ip', $userIp)->first();
+        if ($credit) {
+            $credit->credit += $amount;
+            $credit->save();
+        }
+
+        // $request->session()->put('fund-amount', '0');
+
+        toastr()->success('Payment successful!', ['timeOut' => 5000, 'closeButton' => true]);
+
+        return redirect()->route('dashboard.index');
     }
 }
