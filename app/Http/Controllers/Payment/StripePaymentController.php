@@ -38,7 +38,7 @@ class StripePaymentController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => $domain . 'stripe/success/' . $request->stripe_amount,
+                'success_url' => $domain . 'stripe/success' . $request->stripe_amount,
                 'cancel_url' => $domain . 'add-fund',
             ]);
             return Redirect($checkout_session->url);
