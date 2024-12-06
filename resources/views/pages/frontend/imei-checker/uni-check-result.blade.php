@@ -9,11 +9,16 @@
                 <h3 class="mb-4">IMEI Check Result</h3>
                 @if (!empty($data))
                     <div>
-                        <p><strong>IMEI:</strong> {{ $data['imei'] ?? 'N/A' }}</p>
-                        <p><strong>Brand:</strong> {{ $data['brand'] ?? 'N/A' }}</p>
-                        <p><strong>Model:</strong> {{ $data['model'] ?? 'N/A' }}</p>
-                        <p><strong>Model Name:</strong> {{ $data['modelName'] ?? 'N/A' }}</p>
-                        <p><strong>Manufacturer:</strong> {{ $data['manufacturer'] ?? 'N/A' }}</p>
+                        <p><strong style="color: #000">IMEI:</strong> <span
+                                style="color: #000">{{ $data['imei'] ?? 'N/A' }}</span></p>
+                        <p><strong style="color: #000">Brand:</strong> <span
+                                style="color: #000">{{ $data['brand'] ?? 'N/A' }}</span></p>
+                        <p><strong style="color: #000">Model:</strong> <span
+                                style="color: #000">{{ $data['model'] ?? 'N/A' }}</span></p>
+                        <p><strong style="color: #000">Model Name:</strong> <span
+                                style="color: #000">{{ $data['modelName'] ?? 'N/A' }}</span></p>
+                        <p><strong style="color: #000">Manufacturer:</strong> <span
+                                style="color: #000">{{ $data['manufacturer'] ?? 'N/A' }}</span></p>
                     </div>
                 @else
                     <p class="text-danger">No result available.</p>

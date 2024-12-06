@@ -28,12 +28,12 @@
                             </div>
                         @endif
                     @endif
-                    <p><strong>IMEI:</strong> {{ $data['imei'] }}</p>
+                    <p><strong style="color: #000;">IMEI:</strong> <span style="color: #000">{{ $data['imei'] }}</span></p>
                     @if (isset($data['object']) && is_array($data['object']))
                         @foreach ($data['object'] as $key => $value)
                             @if ($key != 'image' && $key != 'thumbnail')
                                 <p>
-                                    <strong>{{ ucfirst($key) }}:</strong>
+                                    <strong style="color: #000;">{{ ucfirst($key) }}:</strong>
                                     @if (is_bool($value))
                                         <span style="color: red;">
                                             {{ $value ? 'Yes' : 'No' }}
@@ -43,7 +43,7 @@
                                             Not found
                                         </span>
                                     @else
-                                        {{ $value }}
+                                        <span style="color: #000">{{ $value }}</span>
                                     @endif
                                 </p>
                             @endif
@@ -192,10 +192,6 @@
         </div>
     </div>
 
-    <!-- Optional: Include jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <!-- JavaScript for Copying Text to Clipboard and Showing Toast -->
     <script>
         document.getElementById('copyButton').addEventListener('click', function() {
@@ -243,6 +239,12 @@
                     $('#loginSignupModal').modal('show'); // Show login/signup modal
                 }
             }
+        });
+
+        document.querySelectorAll('[data-dismiss="modal"]').forEach(button => {
+            button.addEventListener('click', () => {
+                $('#loginSignupModal').modal('hide');
+            });
         });
     </script>
 @endsection

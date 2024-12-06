@@ -8,6 +8,8 @@
     <meta property="description"
         content="Check IMEI Number and Verify the authenticity of your device with our IMEI Checker. All Brands & Devices supported, including Apple | Samsung | Xiaomi | LG.">
     <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,7 +17,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('asset/frontend/style.css') }}" />
-    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6778879320397925"
@@ -36,15 +37,9 @@
     @include('partials.frontend.footer')
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
-        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('asset/frontend/jquery.min.js') }}"></script>
+    <script src="{{ asset('asset/frontend/popper.min.js') }}"></script>
+    <script src="{{ asset('asset/frontend/bootstrap.min.js') }}"></script>
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">

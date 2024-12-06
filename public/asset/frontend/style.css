@@ -1,3 +1,9 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
+
+body{
+    font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
+}
+
 section.pricing {
     background: #007bff;
     background: linear-gradient(to right, #0062e6, #33aeff);
@@ -252,9 +258,6 @@ section {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -5037,11 +5040,11 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-nav .nav-link.disabled {
     color: rgba(0, 0, 0, 0.3);
@@ -10828,8 +10831,6 @@ a.text-dark:focus {
 }
 
 body {
-    font-family: "Poppins", Arial, sans-serif;
-    font-size: 16px;
     line-height: 1.8;
     font-weight: normal;
     background: #fafafa;
@@ -11347,4 +11348,14 @@ body {
 
 .content-wrapper {
     flex: 1;
+}
+
+.navbar-brand img{
+    width: 250px;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand img {
+        width: 190px;
+    }
 }
