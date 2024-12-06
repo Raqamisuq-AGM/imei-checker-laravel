@@ -58,7 +58,7 @@ Route::get('/imei-result-uni', [UniversalImeiCheckFreeController::class, 'checki
 Route::get('/out-of-credit', [ImeiImeiController::class, 'outOfCredit'])->name('imei.out.credit');
 Route::get('/add-fund', [FrontendController::class, 'buyCredit'])->name('buy.credit');
 Route::post('/add-fund', [FrontendController::class, 'addFund'])->name('buy.credit.fund');
-Route::get('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
+// Route::get('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
 // Strip Route
 Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 Route::get('/stripe/success/{amount}', [StripePaymentController::class, 'success'])->name('stripe.success');

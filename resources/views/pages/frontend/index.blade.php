@@ -514,6 +514,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <div class="toast" id="copyToast" style="position: fixed; top: 20px; right: 20px;" data-delay="3000">
+            <div class="toast-header">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                <!-- Message will be set by JavaScript -->
+            </div>
+        </div>
+    </div>
 @endsection
 
 

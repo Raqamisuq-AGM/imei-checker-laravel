@@ -84,6 +84,8 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
     <script>
         // Get references to the input field and buttons
         const fundAmountInput = document.getElementById('fund-amount');
