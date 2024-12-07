@@ -31,12 +31,12 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form method="POST" action="{{ route('dashboard.setting.update-email') }}"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" class="pt-3">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="new_email">New Email</label>
-                                    <input type="text" class="form-control" id="new_email" name="new_email"
+                                    <input type="text" class="form-control mt-1" id="new_email" name="new_email"
                                         placeholder="New Email" value="{{ old('new_email') }}" required />
                                     @if ($errors->has('new_email'))
                                         <span class="text-danger">{{ $errors->first('new_email') }}</span>

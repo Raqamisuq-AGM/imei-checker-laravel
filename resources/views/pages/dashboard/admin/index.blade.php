@@ -3,65 +3,57 @@
     Dashboard
 @endsection
 @section('content')
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
     </div>
-    <!-- /.content-header -->
+    <!-- Content Header (Page header) -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-6 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">IMEI Checked</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-card-checklist"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ $imeiCount }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-6 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Users</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ $userCount }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section dashboard">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-6 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $imeiCount }}</h3>
-
-                            <p>IEMI Checked</p>
-                        </div>
-                        <div class="icon">
-                            <i class="nav-icon fas fa-th"></i>
-                        </div>
-                        <a href="{{ route('admin.imei.all') }}" class="small-box-footer">view <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-6 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>{{ $userCount }}</h3>
-
-                            <p>Users</p>
-                        </div>
-                        <div class="icon">
-                            <i class="nav-icon fas fa-user"></i>
-                        </div>
-                        <a href="{{ route('admin.user.all') }}" class="small-box-footer">view <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-
-            <div class="d-flex justify-content-between mb-3">
-                <h3>Latest IMEI results</h3>
-                <a href="{{ route('admin.imei.all') }}" class="btn btn-primary">See all</a>
-            </div>
-
+            <h4>Latest IMEI Results</h4>
             <div class="row">
                 <div class="col-12">
                     <div class="card">

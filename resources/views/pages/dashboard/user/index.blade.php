@@ -4,73 +4,55 @@
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
     </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-6 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $checked }}</h3>
-
-                            <p>IMEI Checked</p>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-6 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">IMEI Checked</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-card-checklist"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ $checked }}</h6>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="nav-icon fas fa-th"></i>
-                        </div>
-                        <a href="{{ route('dashboard.imei.all') }}" class="small-box-footer">view <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-6 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>${{ $credit }}</h3>
-
-                            <p>Funds</p>
-                        </div>
-                        <div class="icon">
-                            <i class="nav-icon fas fa-user"></i>
-                        </div>
-                        <a href="{{ route('buy.credit') }}" class="small-box-footer">Buy more <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                {{-- <div class="col-lg-4 col-4">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>{{ $limit }}</h3>
-
-                            <p>Daily Limits</p>
-                        </div>
-                        <div class="icon">
-                            <i class="nav-icon fas fa-th"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">view <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div> --}}
-                <!-- ./col -->
             </div>
-            <!-- /.row -->
+
+            <div class="col-xxl-6 col-md-6">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Funds</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{ $credit }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section dashboard">
+        <div class="container-fluid">
 
             <div class="d-flex justify-content-between mb-3">
                 <h3>Latest IMEI results</h3>

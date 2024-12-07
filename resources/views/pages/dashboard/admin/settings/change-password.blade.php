@@ -31,12 +31,12 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form method="POST" action="{{ route('admin.setting.update-password') }}"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" class="pt-2">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="old_password">Old Password</label>
-                                    <input type="password" class="form-control" id="old_password" name="old_password"
+                                    <input type="password" class="form-control mb-3" id="old_password" name="old_password"
                                         placeholder="Old-password" required />
                                     @if ($errors->has('old_password'))
                                         <span class="text-danger">{{ $errors->first('old_password') }}</span>
@@ -45,7 +45,7 @@
 
                                 <div class="form-group">
                                     <label for="new_password">New Password</label>
-                                    <input type="password" class="form-control" id="new_password" name="new_password"
+                                    <input type="password" class="form-control mb-3" id="new_password" name="new_password"
                                         placeholder="New-password" required />
                                     @if ($errors->has('new_password'))
                                         <span class="text-danger">{{ $errors->first('new_password') }}</span>
