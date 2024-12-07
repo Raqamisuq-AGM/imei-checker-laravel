@@ -11359,3 +11359,64 @@ body {
         width: 190px;
     }
 }
+
+.archImg {
+    margin-left: -300px;
+    margin-bottom: -100px;
+}
+
+
+.archContent {
+    padding-top: 55px;
+}
+
+.titleCol, .titleStyle {
+    margin-bottom: 10px;
+}
+
+.archContent .para {
+    padding-top: 10px;
+}
+.pb-3, .py-3 {
+    padding-bottom: 1rem;
+}
+
+.archContent .para p {
+    font-size: 20px;
+    line-height: 36px;
+    color: #545454;
+}
+
+@media (max-width: 1600px) {
+    .archImg {
+        margin-left: -220px;
+        margin-bottom: -80px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .archImg {
+        margin-left: -180px;
+        margin-bottom: -60px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .archImg {
+        margin-left: -130px;
+    }
+}
+
+
+@media (max-width: 1199px) {
+    .archImg {
+        margin-left: -80px;
+        margin-bottom: -50px;
+    }
+}
+
+@media (max-width: 991px) {
+    .archImg {
+        margin-left: 0;
+    }
+}

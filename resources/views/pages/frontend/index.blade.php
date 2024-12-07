@@ -176,6 +176,7 @@
             </div>
         </div>
     </section>
+
     <!-- Feature Section -->
     {{-- <div class="bg-light py-5 service-1">
         <div class="container">
@@ -231,6 +232,7 @@
             </div>
         </div>
     </div> --}}
+
     <!-- Pricing Section -->
     {{-- <section class="pricing py-5" id="pricing-sec">
         <div class="container">
@@ -332,6 +334,36 @@
     </section>
 
     {{-- Dashboard Highlight Section --}}
+    <section class="ftco-section" style="padding: 2.5rem">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="archImg">
+                        <img src="{{ asset('img/desk-mob-img.webp') }}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="archContent">
+                        <div class="titleStyle themetitle">
+                            <h2>Simple and intuitive Dashboard</h2>
+                        </div>
+                        <div class="para pb-3">
+                            <p> Simple and intuitive in the front end, powerful and stable in the backend, our website can
+                                process
+                                up to 600 orders per minute, each user having his own thread. It also offers the guarantee
+                                that
+                                orders will never be delayed due to an increased volume of new orders.
+                            </p>
+                        </div>
+                        <a href="{{ route('login') }}" rel="nofollow"
+                            class="btn btnSecondary minWdth btn btn-primary btn-lg">Create
+                            Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section class="ftco-section" id="contact-us" style="padding: 2.5rem">
