@@ -1,102 +1,71 @@
-<aside class="main-sidebar sidebar-dark-primary dashboard_sidebar" style="background: #fff">
-    <a href="{{ route('dashboard.index') }}" class="brand-link" style="background: #fff;height: 57px;">
-        <img src="{{ asset('img/logo.png') }}" alt="AdminLTE Logo" class="brand-image" style="float: none;" />
-        <span class="brand-text font-weight-light"></span>
-    </a>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-       with font-awesome or any other icon font library -->
-                <li class="nav-item ">
-                    <a href="{{ route('dashboard.index') }}"
-                        class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        {{-- Dashboard Route --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}"
+                href="{{ route('dashboard.index') }}">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        {{-- Imei Checked Route --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('dashboard.imei.all', 'admin.blog.create') ? 'collapsed' : '' }}"
+                data-bs-target="#blog-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-substack"></i></i><span>Imei Checked</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="blog-nav"
+                class="nav-content collapse {{ request()->routeIs('dashboard.imei.all', 'admin.blog.create') ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('dashboard.imei.all') }}"
+                        class="{{ request()->routeIs('dashboard.imei.all') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>All</span>
                     </a>
                 </li>
-                {{-- Imei Route --}}
-                <li class="nav-item {{ request()->routeIs('dashboard.imei.all') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('dashboard.imei.all') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Imei Checked
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.imei.all') }}"
-                                class="nav-link {{ request()->routeIs('dashboard.imei.all') ? 'active' : '' }}">
-                                @if (request()->routeIs('dashboard.imei.all'))
-                                    <i class="fa fa-circle nav-icon" style="color: #007bff"></i>
-                                @else
-                                    <i class="far fa-circle nav-icon"></i>
-                                @endif
-                                <p>All</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('imei-check') }}" class="nav-link" target="_blank">
-                                @if (request()->routeIs('imei-check'))
-                                    <i class="fa fa-circle nav-icon" style="color: #007bff"></i>
-                                @else
-                                    <i class="far fa-circle nav-icon"></i>
-                                @endif
-                                <p>Check new</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {{-- Setting Route --}}
-                <li
-                    class="nav-item {{ request()->routeIs('dashboard.setting.change-email', 'dashboard.setting.change-password') ? 'menu-open' : '' }}">
-                    <a href="#"
-                        class="nav-link {{ request()->routeIs('dashboard.setting.change-email', 'dashboard.setting.change-password') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Settings
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.setting.change-email') }}"
-                                class="nav-link {{ request()->routeIs('dashboard.setting.change-email') ? 'active' : '' }}">
-                                @if (request()->routeIs('dashboard.setting.change-email'))
-                                    <i class="fa fa-circle nav-icon" style="color: #007bff"></i>
-                                @else
-                                    <i class="far fa-circle nav-icon"></i>
-                                @endif
-                                <p>Change Email</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.setting.change-password') }}"
-                                class="nav-link {{ request()->routeIs('dashboard.setting.change-password') ? 'active' : '' }}">
-                                @if (request()->routeIs('dashboard.setting.change-password'))
-                                    <i class="fa fa-circle nav-icon" style="color: #007bff"></i>
-                                @else
-                                    <i class="far fa-circle nav-icon"></i>
-                                @endif
-                                <p>Change Password</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {{-- Logout Route --}}
-                <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link">
-                        <i class="nav-icon fas fa-power-off"></i>
-                        <p>Logout</p>
+                <li>
+                    <a href="{{ route('imei-check') }}">
+                        <i class="bi bi-circle"></i><span>Check new</span>
                     </a>
                 </li>
             </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
+        </li>
+
+        {{-- Setting Route --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('dashboard.setting.change-email', 'dashboard.setting.change-password') ? 'collapsed' : '' }}"
+                data-bs-target="#setting-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gear"></i></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="setting-nav"
+                class="nav-content collapse {{ request()->routeIs('dashboard.setting.change-email', 'dashboard.setting.change-password') ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('dashboard.setting.change-email') }}"
+                        class="{{ request()->routeIs('dashboard.setting.change-email') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Change Email</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.setting.change-password') }}"
+                        class="{{ request()->routeIs('dashboard.setting.change-password') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Change password</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Logout Route --}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+
+    </ul>
+
 </aside>

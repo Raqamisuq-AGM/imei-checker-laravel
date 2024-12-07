@@ -4,21 +4,19 @@
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Blogs</h1>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+    <div class="pagetitle">
+        <h1>Blogs</h1>
+        <nav>
+            <ol class="breadcrumb" style="background-color: transparent">
+                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Blogs</li>
+            </ol>
+        </nav>
     </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="section dashboard">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">

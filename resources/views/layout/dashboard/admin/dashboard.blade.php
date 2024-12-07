@@ -2,105 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <title>@yield('title')</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img') . '/' . $system[0]->fav }}" /> --}}
-
+    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('img/favicon.png') }}" />
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/fontawesome-free/css/all.min.css') }}" />
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}" />
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('asset/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" />
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}" />
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/jqvmap/jqvmap.min.css') }}" />
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/dist/css/adminlte.min.css') }}" />
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet"
-        href="{{ asset('asset/dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}" />
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/daterangepicker/daterangepicker.css') }}" />
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('asset/dashboard/plugins/summernote/summernote-bs4.min.css') }}" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('asset/dashboard/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/dashboard/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('asset/dashboard/assets/css/style.css') }}" rel="stylesheet">
 
     <style>
-        [class*=sidebar-dark-] .sidebar a {
-            color: #625f6e !important;
-        }
-
-        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
-        .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
-            color: #fff !important;
+        .sidebar-nav .nav-link.active {
+            background: #f6f9ff !important;
+            color: #4154f1 !important;
         }
     </style>
-
     @yield('style')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        @include('partials.dashboard.admin.header')
+<body>
 
-        <!-- Main Sidebar Container -->
-        @include('partials.dashboard.admin.sidebar')
+    <!-- ======= Header ======= -->
+    @include('partials.dashboard.admin.header')
+    <!-- End Header -->
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            @yield('content')
-        </div>
-        <!-- /.content-wrapper -->
-        @include('partials.dashboard.admin.footer')
-    </div>
-    <!-- ./wrapper -->
+    <!-- ======= Sidebar ======= -->
+    @include('partials.dashboard.admin.sidebar')
+    <!-- End Sidebar-->
 
-    <!-- jQuery -->
-    <script src="{{ asset('asset/dashboard/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('asset/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge("uibutton", $.ui.button);
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('asset/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('asset/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('asset/dashboard/plugins/sparklines/sparkline.js') }}"></script>
-    <!-- JQVMap -->
-    <script src="{{ asset('asset/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('asset/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{ asset('asset/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('asset/dashboard/plugins/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('asset/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('asset/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-    </script>
-    <!-- Summernote -->
-    <script src="{{ asset('asset/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('asset/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('asset/dashboard/dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('asset/dashboard/dist/js/demo.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('asset/dashboard/dist/js/pages/dashboard.js') }}"></script>
+    <main id="main" class="main">
+        @yield('content')
+    </main><!-- End #main -->
 
+    <!-- ======= Footer ======= -->
+    {{-- @include('partials.dashboard.admin.footer') --}}
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    {{-- <script src="{{ asset('asset/dashboard/assets/vendor/apexcharts/apexcharts.min.js') }}"></script> --}}
+    <script src="{{ asset('asset/dashboard/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('asset/dashboard/assets/vendor/chart.js/chart.umd.js') }}"></script> --}}
+    {{-- <script src="{{ asset('asset/dashboard/assets/vendor/echarts/echarts.min.js') }}"></script> --}}
+    <script src="{{ asset('asset/dashboard/assets/vendor/quill/quill.js') }}"></script>
+    {{-- <script src="{{ asset('asset/dashboard/assets/vendor/simple-datatables/simple-datatables.js') }}"></script> --}}
+    <script src="{{ asset('asset/dashboard/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+    {{-- <script src="{{ asset('asset/dashboard/assets/vendor/php-email-form/validate.js') }}"></script> --}}
+
+    <!-- Template Main JS File -->
+    <script src="{{ asset('asset/dashboard/assets/js/main.js') }}"></script>
     @yield('script')
 </body>
 

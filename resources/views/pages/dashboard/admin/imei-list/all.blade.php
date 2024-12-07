@@ -4,21 +4,19 @@
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">IMEI Lists</h1>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+    <div class="pagetitle">
+        <h1>Users</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+        </nav>
     </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="section dashboard">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -123,7 +121,8 @@
                                                     </li>
                                                 @else
                                                     <li class="page-item">
-                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                        <a class="page-link"
+                                                            href="{{ $url }}">{{ $page }}</a>
                                                     </li>
                                                 @endif
                                             @endforeach

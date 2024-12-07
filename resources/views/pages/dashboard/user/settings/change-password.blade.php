@@ -31,13 +31,13 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form method="POST" action="{{ route('dashboard.setting.update-password') }}"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" class="pt-3">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="old_password">Old Password</label>
-                                    <input type="password" class="form-control" id="old_password" name="old_password"
-                                        placeholder="Old-password" required />
+                                    <input type="password" class="form-control mt-1 mb-3" id="old_password"
+                                        name="old_password" placeholder="Old-password" required />
                                     @if ($errors->has('old_password'))
                                         <span class="text-danger">{{ $errors->first('old_password') }}</span>
                                     @endif
@@ -45,15 +45,15 @@
 
                                 <div class="form-group">
                                     <label for="new_password">New Password</label>
-                                    <input type="password" class="form-control" id="new_password" name="new_password"
-                                        placeholder="New-password" required />
+                                    <input type="password" class="form-control mt-1 mb-3" id="new_password"
+                                        name="new_password" placeholder="New-password" required />
                                     @if ($errors->has('new_password'))
                                         <span class="text-danger">{{ $errors->first('new_password') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="new_password_confirmation">Confirm Password</label>
-                                    <input type="password" class="form-control" id="new_password_confirmation"
+                                    <input type="password" class="form-control mt-1  mb-3" id="new_password_confirmation"
                                         name="new_password_confirmation" placeholder="Confirm-password" required />
                                     @if ($errors->has('new_password_confirmation'))
                                         <span class="text-danger">{{ $errors->first('new_password_confirmation') }}</span>

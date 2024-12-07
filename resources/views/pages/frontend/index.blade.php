@@ -331,6 +331,8 @@
         </div>
     </section>
 
+    {{-- Dashboard Highlight Section --}}
+
     <!-- Contact Section -->
     <section class="ftco-section" id="contact-us" style="padding: 2.5rem">
         <div class="container-xl">
@@ -429,6 +431,7 @@
             </div>
         </div>
     </section>
+
     <!-- Blog Section -->
     <section class="blog-listing gray-bg">
         <div class="container-xl">
