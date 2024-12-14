@@ -45,7 +45,7 @@
                                                     data-toggle="modal" data-target="#viewModal"
                                                     data-name="{{ $item->name }}" data-email="{{ $item->email }}"
                                                     data-subject="{{ $item->subject }}" data-message="{{ $item->message }}">
-                                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                                    <i class='bx bx-mail-send'></i>
                                                 </a>
                                             </td>
                                         </tr>

@@ -75,7 +75,7 @@ Route::get('/paypal/error', [PayPalController::class, 'paypal.error']);
 
 
 // Admin Route
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin.index');
 
     Route::prefix('admin')->group(function () {
@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function () {
 
 
 // User Route
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
     Route::prefix('dashboard')->group(function () {
 

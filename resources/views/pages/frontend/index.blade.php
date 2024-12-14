@@ -485,9 +485,10 @@
                                             <span>{{ \Carbon\Carbon::parse($item->created_at)->format('d') }}</span>
                                             <label>{{ \Carbon\Carbon::parse($item->created_at)->format('M') }}</label>
                                         </div>
-                                        <a href="#">
+                                        <a href="{{ route('blog.detail', ['slug' => $item->slug]) }}"
+                                            style="width: 100%; display: block; height: 245px;">
                                             <img src="{{ asset($item->thumb) }}" title="{{ $item->title }}"
-                                                alt="{{ $item->title }}" />
+                                                alt="{{ $item->title }}" style="width: 100%; height: 100%;" />
                                         </a>
                                     </div>
                                     <div class="blog-info">

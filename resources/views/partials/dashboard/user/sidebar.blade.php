@@ -11,6 +11,14 @@
             </a>
         </li>
 
+        {{-- Add Fund Route --}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('buy.credit') }}">
+                <i class='bx bx-dollar'></i>
+                <span>Add Fund</span>
+            </a>
+        </li>
+
         {{-- Imei Checked Route --}}
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('dashboard.imei.all', 'admin.blog.create') ? 'collapsed' : '' }}"
