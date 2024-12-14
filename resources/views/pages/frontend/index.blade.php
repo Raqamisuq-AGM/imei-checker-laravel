@@ -85,9 +85,9 @@
                 </div>
                 <div class="col-lg-6 order-md-0">
                     <!-- Surtitle -->
-                    <h5 class="h5 mb-5 text-uppercase text-warning mb-5">
+                    <h2 class="h5 text-uppercase text-warning mb-2" style="font-size: 50px; font-weight: bold;">
                         IMEI Check Services
-                    </h5>
+                    </h2>
                     <!-- Text -->
                     <p class="lead mb-10">
                         Check IMEI Pro offers a variety of IMEI Check Services providing
@@ -112,9 +112,9 @@
         <div class="container-xl">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-12">
-                    <p style="font-size: 25px; font-weight: 600;">
+                    <h2 style="font-size: 50px; font-weight: bold;">
                         Universal Model Check Free
-                    </p>
+                    </h2>
                     <form id="imeiForm" action="{{ route('imei-check-uni') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
@@ -366,11 +366,18 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="ftco-section" id="contact-us" style="padding: 2.5rem">
+    <section class="ftco-section" id="contact-us" style="padding: 2.5rem; margin-top: 80px">
         <div class="container-xl">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Contact Us</h2>
+                    <h2 class="heading-section" style="font-size: 40px; margin-bottom: 20px;">Still have questions?
+                        <strong>Contact
+                            Us!</strong>
+                    </h2>
+                    <b style="font-size: 18px; margin-bottom: 20px; display: block;">
+                        <font color="red">PS: We do NOT decode iCloud / We can't locate stolen phones! <br>
+                            This website does NOT offer decoding services of any kind! </font>
+                    </b>
                 </div>
             </div>
             <div class="row justify-content-center">

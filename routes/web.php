@@ -31,6 +31,11 @@ use Illuminate\Support\Facades\Route;
 // Frontend Route
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::post('/contact-us-submit', [FrontendController::class, 'contactUsSubmit'])->name('contactUsSubmit');
+Route::get('/contact-us', [FrontendController::class, 'contactUs'])->name('contact-us');
+Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-conditions', [FrontendController::class, 'termsCondition'])->name('terms-conditions');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('about-us');
 Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [FrontendController::class, 'blogDetails'])->name('blog.detail');
 Route::get('/imei-check', [FrontendController::class, 'imeiCheck'])->name('imei-check');

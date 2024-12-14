@@ -255,4 +255,29 @@ class FrontendController extends Controller
         toastr()->success('Your message submitted successfully. We will contact you soon', 'success', ['timeOut' => 5000, 'closeButton' => true]);
         return redirect()->route('index');
     }
+
+    public function aboutUs()
+    {
+        return view('pages.frontend.about-us.about-us');
+    }
+
+    public function contactUs()
+    {
+        return view('pages.frontend.contact-us.contact-us');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('pages.frontend.privacy-policy.privacy-policy');
+    }
+
+    public function termsCondition()
+    {
+        return view('pages.frontend.terms-condition.terms-condition');
+    }
+
+    public function faq()
+    {
+        return view('pages.frontend.faq.faq');
+    }
 }
