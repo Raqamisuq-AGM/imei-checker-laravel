@@ -48,11 +48,11 @@
                                             <td>
                                                 <a href="{{ route('admin.blog.edit', ['id' => $item->id]) }}"
                                                     style="margin-right: 15px; color: #0c4b36;">
-                                                    <i class="fas fa-pen" aria-hidden="true"></i>
+                                                    <i class='bx bxs-edit'></i>
                                                 </a>
                                                 <a href="{{ route('admin.blog.delete', ['id' => $item->id]) }}"
                                                     style="color: #0c4b36;">
-                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                    <i class='bx bx-trash'></i>
                                                 </a>
                                             </td>
                                         </tr>
