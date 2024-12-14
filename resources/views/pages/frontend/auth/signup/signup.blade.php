@@ -65,7 +65,7 @@
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Signup</button>
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="{{ route('login') }}"
+                            <p class="fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="{{ route('login') }}"
                                     class="link-danger">Login</a></p>
                         </div>
                     </form>

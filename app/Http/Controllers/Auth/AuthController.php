@@ -25,6 +25,7 @@ class AuthController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit

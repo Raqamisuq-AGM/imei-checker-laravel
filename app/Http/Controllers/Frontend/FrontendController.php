@@ -48,6 +48,7 @@ class FrontendController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit
@@ -78,6 +79,7 @@ class FrontendController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit
@@ -107,6 +109,7 @@ class FrontendController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit
@@ -137,6 +140,7 @@ class FrontendController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit
@@ -176,6 +180,7 @@ class FrontendController extends Controller
             // Create the user
             $user = new User();
             $user->ip = $userIp;
+            $user->type = 'user';
             $user->save();
 
             // Create the user limit
@@ -258,26 +263,141 @@ class FrontendController extends Controller
 
     public function aboutUs()
     {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->type = 'user';
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '3';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
         return view('pages.frontend.about-us.about-us');
     }
 
     public function contactUs()
     {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->type = 'user';
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '3';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
         return view('pages.frontend.contact-us.contact-us');
     }
 
     public function privacyPolicy()
     {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->type = 'user';
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '3';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
         return view('pages.frontend.privacy-policy.privacy-policy');
     }
 
     public function termsCondition()
     {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->type = 'user';
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '3';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
         return view('pages.frontend.terms-condition.terms-condition');
     }
 
     public function faq()
     {
+        $userIp = request()->ip();
+        $user = User::where('ip', $userIp)->first();
+        if ($user == null) {
+            // Create the user
+            $user = new User();
+            $user->ip = $userIp;
+            $user->type = 'user';
+            $user->save();
+
+            // Create the user limit
+            $limit = new ImeiLimit();
+            $limit->user_id = $user->id;
+            $limit->ip = $userIp;
+            $limit->limit = '3';
+            $limit->save();
+
+            // Create the user limit
+            $credit = new Credit();
+            $credit->user_id = $user->id;
+            $credit->credit = '0';
+            $credit->ip = $userIp;
+            $credit->save();
+        }
         return view('pages.frontend.faq.faq');
     }
 }
